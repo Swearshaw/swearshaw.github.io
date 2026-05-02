@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI工具合集 | AI教程学院</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+<script src="js/lang.js" defer></script>
+<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}</style>
+</head>
+<body>
+
+<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
+<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
+<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
+<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
+<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
+<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
+</div>
+</div>
+
+<nav>
+<div class="nav-wrap">
+<div class="logo" data-lang="logo">AI教程学院</div>
+<div class="nav-menu">
+<a href="index.html" data-lang="navHome">首页</a>
+<div class="dropdown">
+<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
+<div class="dropdown-content">
+<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
+<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
+<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
+</div>
+</div>
+<a href="tools.html" data-lang="navTools">工具合集</a>
+<a href="learn.html" data-lang="navLearn">学习资源</a>
+</div>
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="搜索教程...">
+<button onclick="searchSite()">搜索</button>
+</div>
+</div>
+</nav>
+
+<div class="container">
+<h1 data-lang="tools_title">🤖 AI 热门工具合集</h1>
+<div class="card-grid">
+
+<div class="card">
+<h3>💬 ChatGPT</h3>
+<p>通用对话AI，适合写作、学习、编程、思路梳理，全球使用率极高。</p>
+<a href="https://chat.openai.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+<div class="card">
+<h3>🧠 文心一言</h3>
+<p>国内主流AI，支持文档解析、多模态对话、办公辅助、知识问答。</p>
+<a href="https://yiyan.baidu.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+<div class="card">
+<h3>🎨 Midjourney</h3>
+<p>专业AI绘图工具，通过提示词生成插画、场景、人物、艺术作品。</p>
+<a href="https://www.midjourney.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+<div class="card">
+<h3>📝 通义千问</h3>
+<p>阿里大模型，适合办公写作、数据分析、长文档解读、日常问答。</p>
+<a href="https://tongyi.aliyun.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+<div class="card">
+<h3>🔍 Kimi 智能助手</h3>
+<p>超长文本解析、论文阅读、资料整理，适合学生和办公人群。</p>
+<a href="https://kimi.moonshot.cn" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+<div class="card">
+<h3>⚙️ Coze 扣子</h3>
+<p>AI工作流搭建、自定义机器人，零基础也能做自动化AI应用。</p>
+<a href="https://www.coze.cn" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+<div class="card">
+<h3>🧩 豆包</h3>
+<p>字节跳动出品的AI助手，支持多模态对话、内容创作、智能问答，体验流畅。</p>
+<a href="https://www.doubao.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+</div>
+
+</div>
+</div>
+
+<footer style="white-space:pre-line;line-height:1.6;">
+制作者Swearshaw
+感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
+目前关于AI的使用教学较少，后续会继续寻找
+</footer>
+</body>
+</html>

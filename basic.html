@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>基础使用 | AI教程学院</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+<script src="js/lang.js" defer></script>
+<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}</style>
+</head>
+<body>
+
+<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
+<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
+<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
+<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
+<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
+<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
+</div>
+</div>
+
+<nav>
+<div class="nav-wrap">
+<div class="logo" data-lang="logo">AI教程学院</div>
+<div class="nav-menu">
+<a href="index.html" data-lang="navHome">首页</a>
+<div class="dropdown">
+<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
+<div class="dropdown-content">
+<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
+<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
+<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
+</div>
+</div>
+<a href="tools.html" data-lang="navTools">工具合集</a>
+<a href="learn.html" data-lang="navLearn">学习资源</a>
+</div>
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="搜索教程...">
+<button onclick="searchSite()">搜索</button>
+</div>
+</div>
+</nav>
+
+<div class="container">
+<h1 data-lang="basic_title">AI工具零基础完整实操入门指南</h1>
+<div class="course-main" style="padding:30px;background:white;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+
+<h2 data-lang="basic_part1">1. 什么是AI工具</h2>
+<p data-lang="basic_part1_text">AI工具是依托人工智能核心算法研发打造的智能数字化服务平台，贴合日常学习、校园作业、职场办公、日常生活全场景使用。</p>
+
+<h2 data-lang="basic_part2">2. 注册与登录</h2>
+<p data-lang="basic_part2_text">优先认准官方正版、口碑合规平台，使用手机号或邮箱完成注册，安全便捷。</p>
+
+<h2 data-lang="basic_part3">3. 界面功能详解</h2>
+<p data-lang="basic_part3_text">主流AI界面包含：输入框、历史记录、设置面板、新建对话、清空记录、导出分享。</p>
+
+<h2 data-lang="basic_part4">4. 基础提问方法</h2>
+<p data-lang="basic_part4_text">提问越清晰具体，AI输出越精准；避免模糊笼统，明确场景、要求、格式。</p>
+
+<h2 data-lang="basic_part5">5. 内容保存与导出</h2>
+<p data-lang="basic_part5_text">支持复制、云端保存、多格式导出、截图留存，方便随时复用。</p>
+
+<h2 data-lang="basic_part6">6. 常见问题解决</h2>
+<p data-lang="basic_part6_text">卡顿、中断、加载异常可通过刷新、切换网络、重启对话快速修复。</p>
+
+</div>
+</div>
+
+<footer style="white-space:pre-line;line-height:1.6;">
+制作者Swearshaw
+感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
+目前关于AI的使用教学较少，后续会继续寻找
+</footer>
+</body>
+</html>

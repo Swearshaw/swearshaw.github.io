@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习资源 | AI教程学院</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+<script src="js/lang.js" defer></script>
+<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}.resource-card{margin:30px 0;}.resource-card h2{color:#6366f1;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid #eee;}.link-item{display:block;padding:12px 16px;background:#f8f9ff;border-radius:12px;margin:10px 0;text-decoration:none;color:#2c3e50;transition:0.3s;}.link-item:hover{background:#6366f1;color:#fff;transform:translateX(6px);}</style>
+</head>
+<body>
+
+<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
+<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
+<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
+<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
+<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
+<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
+</div>
+</div>
+
+<nav>
+<div class="nav-wrap">
+<div class="logo" data-lang="logo">AI教程学院</div>
+<div class="nav-menu">
+<a href="index.html" data-lang="navHome">首页</a>
+<div class="dropdown">
+<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
+<div class="dropdown-content">
+<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
+<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
+<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
+</div>
+</div>
+<a href="tools.html" data-lang="navTools">工具合集</a>
+<a href="learn.html" data-lang="navLearn">学习资源</a>
+</div>
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="搜索教程...">
+<button onclick="searchSite()">搜索</button>
+</div>
+</div>
+</nav>
+
+<div class="container">
+<h1 data-lang="learn_title">📚 AI 全套学习资源库</h1>
+
+<div class="resource-card">
+<h2>一、零基础入门</h2>
+<a class="link-item" href="https://www.bilibili.com/video/BV1134y1d72L/" target="_blank">B 站《一次看懂人工智能》</a>
+<a class="link-item" href="https://www.bilibili.com/video/BV1EE411W7V3/" target="_blank">B 站《AI 101》</a>
+<a class="link-item" href="https://www.bilibili.com/video/BV12E411x7Hm/" target="_blank">B 站《小学生也能听懂的人工智能》</a>
+</div>
+
+<div class="resource-card">
+<h2>二、AI 工具实操</h2>
+<a class="link-item" href="https://space.bilibili.com/1814756990/channel/collectiondetail?sid=1285674&ctype=0" target="_blank">B 站《SD 新手到大神 10 课》</a>
+<a class="link-item" href="https://www.waytoagi.com/question/84425" target="_blank">Stable Diffusion 保姆级教程</a>
+</div>
+
+<div class="resource-card">
+<h2>三、进阶系统学习</h2>
+<a class="link-item" href="https://developer.aliyun.com/article/1703532" target="_blank">深度学习入门：从神经网络到Transformer</a>
+<a class="link-item" href="https://blog.csdn.net/liluo_2951121599/article/details/137646669" target="_blank">PyTorch 深度学习实践（附源码）</a>
+</div>
+
+</div>
+
+<footer style="white-space:pre-line;line-height:1.6;">
+制作者Swearshaw
+感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
+目前关于AI的使用教学较少，后续会继续寻找
+</footer>
+</body>
+</html>
