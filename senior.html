@@ -3,75 +3,475 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>高级使用 | AI教程学院</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
-<script src="js/lang.js" defer></script>
-<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}</style>
+<title data-lang="title">今天你会用AI了么</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
+}
+nav {
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
+  z-index: 999999;
+  padding: 8px 0;
+}
+.nav-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #000;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex;
+  gap: 8px;
+}
+#searchInput {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 150px;
+}
+.search-bar button {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.lang-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#langMenu {
+  display:none; 
+  position: fixed; 
+  top:55px; 
+  right:20px; 
+  background:rgba(255,255,255,0.95); 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  width:120px; 
+  z-index:999999;
+  overflow: hidden;
+}
+#langMenu a {
+  display:block;
+  padding:10px 12px;
+  cursor:pointer;
+  color:#333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+#langMenu a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 6px 0;
+  width: 100%;
+  scrollbar-width: none;
+  position: relative;
+  overflow: visible !important;
+  z-index: 9999999 !important;
+}
+.nav-menu::-webkit-scrollbar {display:none;}
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  position: fixed !important;
+  z-index: 9999999 !important;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.dropdown-content span {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
+.section-card{
+  background:#fff;
+  border-radius:20px;
+  padding:25px 30px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+}
+.section-card h2{
+  margin-top:0;
+  margin-bottom:12px;
+  color:#222;
+}
+.section-card h3{
+  font-size:16px;
+  color:#333;
+  margin-top:16px;
+  margin-bottom:8px;
+}
+.section-card p{
+  margin:0;
+  color:#444;
+  line-height:1.7;
+}
+.container{
+  padding:30px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.container h1{
+  color:#fff;
+  margin-bottom:30px;
+  text-align:center;
+}
+footer{
+  color:#fff;
+  padding:20px 30px;
+  line-height:1.6;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+}
+</style>
 </head>
 <body>
 
-<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
-<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
-<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
-<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
-<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
-<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
-</div>
-</div>
-
 <nav>
-<div class="nav-wrap">
-<div class="logo" data-lang="logo">AI教程学院</div>
-<div class="nav-menu">
-<a href="index.html" data-lang="navHome">首页</a>
-<div class="dropdown">
-<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
-<div class="dropdown-content">
-<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
-<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
-<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
-</div>
-</div>
-<a href="tools.html" data-lang="navTools">工具合集</a>
-<a href="learn.html" data-lang="navLearn">学习资源</a>
-</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="搜索教程...">
-<button onclick="searchSite()">搜索</button>
-</div>
-</div>
+  <div class="nav-wrap">
+    <div class="nav-top">
+      <div class="logo" data-lang="logo">今天你会用AI了么</div>
+      <div class="nav-right">
+        <div class="search-bar">
+          <input id="searchInput" type="text" data-lang-placeholder="searchPlaceholder" placeholder="搜索教程...">
+          <button data-lang="searchBtn">搜索</button>
+        </div>
+        <button class="lang-btn" onclick="toggleLangMenu()">🌍 Language</button>
+      </div>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" data-lang="navIndex">首页</a>
+      <div class="dropdown">
+        <button class="dropbtn" data-lang="navTeach">使用教学 ▾</button>
+        <div class="dropdown-content" id="teachMenu">
+          <a href="basic.html" data-lang="menuBasic">基础使用 <span data-lang="menuBasicTip">适合首次接触AI工具</span></a>
+          <a href="advance.html" data-lang="menuAdvance">进阶使用 <span data-lang="menuAdvanceTip">适合个人学习/小型项目</span></a>
+          <a href="senior.html" data-lang="menuSenior">高级使用 <span data-lang="menuSeniorTip">适合大型项目编辑</span></a>
+        </div>
+      </div>
+      <a href="tools.html" data-lang="navTools">工具合集</a>
+      <a href="learn.html" data-lang="navLearn">学习资源</a>
+    </div>
+  </div>
 </nav>
 
+<!-- 语言菜单 -->
+<div id="langMenu">
+<a onclick="setLang('zh')">中文</a>
+<a onclick="setLang('ja')">日本語</a>
+<a onclick="setLang('en')">English</a>
+</div>
+
 <div class="container">
-<h1 data-lang="senior_title">高阶AI实操全指南（企业+私用全落地）</h1>
-<div class="course-main" style="padding:30px;background:white;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+<h1 data-lang="pageTitle">高阶AI实操全指南（企业+私用全落地）</h1>
 
-<h2 data-lang="senior_part1">一、AI工作流搭建</h2>
-<p data-lang="senior_part1_text">一站式全自动批量处理：上传、识别、提炼、写作、归档全流程自动化。</p>
-
-<h2 data-lang="senior_part2">二、API接口调用基础</h2>
-<p data-lang="senior_part2_text">把AI能力接入网站、软件、小程序，低成本拥有专属AI功能。</p>
-
-<h2 data-lang="senior_part3">三、自动化工具使用</h2>
-<p data-lang="senior_part3_text">零代码、不写程序，自动完成文件整理、日报生成、信息抓取。</p>
-
-<h2 data-lang="senior_part4">四、模型参数调整</h2>
-<p data-lang="senior_part4_text">随机性、长度、重复度、创意度、专业倾向精准控制文风。</p>
-
-<h2 data-lang="senior_part5">五、企业级AI应用</h2>
-<p data-lang="senior_part5_text">私有知识库、智能客服、数据分析、批量内容生产、全员办公助手。</p>
-
-<h2 data-lang="senior_part6">六、本地模型部署</h2>
-<p data-lang="senior_part6_text">断网可用、隐私不外泄，安全私密自用的本地私有化部署。</p>
-
-</div>
+<div class="section-card">
+<h2 data-lang="s1">一、AI自动化工作流（无人值守批量干活）</h2>
+<p data-lang="s1p1">搭建流程：输入 → 识别 → 提取 → 处理 → 写作 → 排版 → 导出 → 完成。</p>
+<p data-lang="s1p2">适用于：批量写文案、做表格、汇总数据、生成报告、处理文件。</p>
 </div>
 
-<footer style="white-space:pre-line;line-height:1.6;">
-制作者Swearshaw
+<div class="section-card">
+<h2 data-lang="s2">二、API接口接入（把AI放进你的网站/软件）</h2>
+<p data-lang="s2p1">API = 把AI能力封装成接口。</p>
+<p data-lang="s2p2">用途：智能客服、对话机器人、文档助手、内部工具、小程序。</p>
+<p data-lang="s2p3">适合企业、开发者、技术团队使用。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s3">三、本地模型部署（断网可用、隐私绝对安全）</h2>
+<p data-lang="s3p1">把模型装在自己电脑/服务器，不上云、不联网、数据不外泄。</p>
+<p data-lang="s3p2">适合：涉密单位、企业内网、隐私敏感场景、法律/医疗/金融。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s4">四、模型参数微调（让AI更贴合行业）</h2>
+<p data-lang="s4p1">温度Temperature：越低越严谨，越高越创意。</p>
+<p data-lang="s4p2">长度控制：固定输出字数。</p>
+<p data-lang="s4p3">Top_p：多样性控制。</p>
+<p data-lang="s4p4">频率惩罚：避免重复。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s5">五、企业级AI落地场景</h2>
+<p data-lang="s5p1">内部知识库问答、智能客服、合同审查、报告生成、数据清洗、自动化办公、员工培训。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s6">六、多模态协同（文字+图片+音频+视频一体）</h2>
+<p data-lang="s6p1">文字生成图片、图片生成文字、视频理解、语音对话、全套内容生产。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s7">七、高阶提示词工程（专业级）</h2>
+<p data-lang="s7p1">思维链CoT、上下文学习、角色强化、自我修正、对抗性指令、结构化输出。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s8">八、高阶工具推荐（企业/专业）</h2>
+<p data-lang="s8p1">Claude Opus、GPT-4o、Kimi超长文本、DeepSeek、通义千问企业版、本地模型套件。</p>
+</div>
+
+</div>
+
+<footer data-lang="footer">
+制作者Swearshaw<br>
 感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
-目前关于AI的使用教学较少，后续会继续寻找
 </footer>
+
+<script>
+// 翻译字典
+const langData = {
+  zh: {
+    title: "今天你会用AI了么",
+    logo: "今天你会用AI了么",
+    searchPlaceholder: "搜索教程...",
+    searchBtn: "搜索",
+    navIndex: "首页",
+    navTeach: "使用教学 ▾",
+    navTools: "工具合集",
+    navLearn: "学习资源",
+    menuBasic: "基础使用",
+    menuBasicTip: "适合首次接触AI工具",
+    menuAdvance: "进阶使用",
+    menuAdvanceTip: "适合个人学习/小型项目",
+    menuSenior: "高级使用",
+    menuSeniorTip: "适合大型项目编辑",
+    pageTitle: "高阶AI实操全指南（企业+私用全落地）",
+    s1: "一、AI自动化工作流（无人值守批量干活）",
+    s1p1: "搭建流程：输入 → 识别 → 提取 → 处理 → 写作 → 排版 → 导出 → 完成。",
+    s1p2: "适用于：批量写文案、做表格、汇总数据、生成报告、处理文件。",
+    s2: "二、API接口接入（把AI放进你的网站/软件）",
+    s2p1: "API = 把AI能力封装成接口。",
+    s2p2: "用途：智能客服、对话机器人、文档助手、内部工具、小程序。",
+    s2p3: "适合企业、开发者、技术团队使用。",
+    s3: "三、本地模型部署（断网可用、隐私绝对安全）",
+    s3p1: "把模型装在自己电脑/服务器，不上云、不联网、数据不外泄。",
+    s3p2: "适合：涉密单位、企业内网、隐私敏感场景、法律/医疗/金融。",
+    s4: "四、模型参数微调（让AI更贴合行业）",
+    s4p1: "温度Temperature：越低越严谨，越高越创意。",
+    s4p2: "长度控制：固定输出字数。",
+    s4p3: "Top_p：多样性控制。",
+    s4p4: "频率惩罚：避免重复。",
+    s5: "五、企业级AI落地场景",
+    s5p1: "内部知识库问答、智能客服、合同审查、报告生成、数据清洗、自动化办公、员工培训。",
+    s6: "六、多模态协同（文字+图片+音频+视频一体）",
+    s6p1: "文字生成图片、图片生成文字、视频理解、语音对话、全套内容生产。",
+    s7: "七、高阶提示词工程（专业级）",
+    s7p1: "思维链CoT、上下文学习、角色强化、自我修正、对抗性指令、结构化输出。",
+    s8: "八、高阶工具推荐（企业/专业）",
+    s8p1: "Claude Opus、GPT-4o、Kimi超长文本、DeepSeek、通义千问企业版、本地模型套件。",
+    footer: "制作者Swearshaw<br>感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享"
+  },
+  ja: {
+    title: "AIを使いこなせますか",
+    logo: "AIを使いこなせますか",
+    searchPlaceholder: "チュートリアル検索...",
+    searchBtn: "検索",
+    navIndex: "ホーム",
+    navTeach: "使い方講座 ▾",
+    navTools: "ツール集",
+    navLearn: "学習リソース",
+    menuBasic: "基本操作",
+    menuBasicTip: "AI初心者向け",
+    menuAdvance: "中級活用",
+    menuAdvanceTip: "個人学習・小規模プロジェクト向け",
+    menuSenior: "上級応用",
+    menuSeniorTip: "大規模プロジェクト編集向け",
+    pageTitle: "AI上級実践ガイド（企業・個人両対応）",
+    s1: "一、AI自動化ワークフロー（無人運用・一括処理）",
+    s1p1: "構築手順：入力 → 認識 → 抽出 → 処理 → 作成 → レイアウト → 出力 → 完了。",
+    s1p2: "用途：文案一括作成、表作成、データ集計、レポート生成、ファイル処理。",
+    s2: "二、API接続（AIをサイト・ソフトに導入）",
+    s2p1: "API = AI機能を部品化したインターフェース。",
+    s2p2: "用途：スマートサポート、チャットボット、文書アシスタント、社内ツール、ミニプログラム。",
+    s2p3: "企業、開発者、技術チーム向け。",
+    s3: "三、ローカルモデル導入（オフライン可・プライバシー完全安全）",
+    s3p1: "モデルを自社PC・サーバーに導入。クラウド不使用、ネット接続なし、データ外部流出なし。",
+    s3p2: "向け：機密情報扱う部署、企業内网、プライバシー重視、法律・医療・金融。",
+    s4: "四、モデルパラメータ微調整（業務に最適化）",
+    s4p1: "温度Temperature：低いほど堅実、高いほどクリエイティブ。",
+    s4p2: "長さ制御：出力文字数固定。",
+    s4p3: "Top_p：多様性調整。",
+    s4p4: "頻度ペナルティ：繰り返しを抑制。",
+    s5: "五、企業級AI導入シーン",
+    s5p1: "社内ナレッジ質問、AIサポート、契約審査、レポート作成、データクレンジング、自動化業務、研修支援。",
+    s6: "六、マルチモーダル連携（テキスト+画像+音声+動画一体）",
+    s6p1: "文章→画像、画像→文章、動画理解、音声会話、コンテンツ一括制作。",
+    s7: "七、高級プロンプトエンジニアリング（プロ級）",
+    s7p1: "思考連鎖CoT、文脈学習、ロール強化、自己修正、敵対的命令、構造化出力。",
+    s8: "八、高級ツール推奨（企業・プロ向け）",
+    s8p1: "Claude Opus、GPT-4o、Kimi長文、DeepSeek、通義千問企業版、ローカルモデルパック。",
+    footer: "制作：Swearshaw<br>科普中国、Nenlyさん、商湯教育に感謝"
+  },
+  en: {
+    title: "Can You Use AI Today",
+    logo: "Can You Use AI Today",
+    searchPlaceholder: "Search tutorials...",
+    searchBtn: "Search",
+    navIndex: "Home",
+    navTeach: "Tutorials ▾",
+    navTools: "Tools",
+    navLearn: "Resources",
+    menuBasic: "Basic Use",
+    menuBasicTip: "For AI beginners",
+    menuAdvance: "Advanced Use",
+    menuAdvanceTip: "For study & small projects",
+    menuSenior: "Senior Use",
+    menuSeniorTip: "For large project editing",
+    pageTitle: "Advanced AI Practical Guide (Enterprise & Personal)",
+    s1: "1. AI Automation Workflow (Unattended Batch Processing)",
+    s1p1: "Process: Input → Recognize → Extract → Process → Write → Layout → Export → Done.",
+    s1p2: "For: Batch copywriting, tables, data summary, reports, file processing.",
+    s2: "2. API Integration (Add AI to Your Website/Software)",
+    s2p1: "API = AI capabilities packaged as reusable interfaces.",
+    s2p2: "Use: Smart support, chatbots, document assistants, internal tools, mini programs.",
+    s2p3: "For enterprises, developers, tech teams.",
+    s3: "3. Local Model Deployment (Offline, 100% Private)",
+    s3p1: "Install models on your own PC/server. No cloud, no internet, no data leakage.",
+    s3p2: "For: Confidential units, intranet, privacy-sensitive scenes, legal/medical/finance.",
+    s4: "4. Model Parameter Tuning (Fit Your Industry)",
+    s4p1: "Temperature: Lower = more precise, Higher = more creative.",
+    s4p2: "Length control: Fixed output words.",
+    s4p3: "Top_p: Diversity control.",
+    s4p4: "Frequency penalty: Avoid repetition.",
+    s5: "5. Enterprise AI Scenarios",
+    s5p1: "Internal Q&A, AI support, contract review, report generation, data cleaning, office automation, staff training.",
+    s6: "6. Multi-Modal Collaboration (Text + Image + Audio + Video)",
+    s7: "7. Advanced Prompt Engineering (Professional)",
+    s7p1: "CoT, in-context learning, role reinforcement, self-correction, adversarial instructions, structured output.",
+    s8: "8. Advanced Tools (Enterprise/Professional)",
+    s8p1: "Claude Opus, GPT-4o, Kimi, DeepSeek, Tongyi Qianwen Enterprise, Local Model Kit.",
+    footer: "Created by Swearshaw<br>Thanks to Science China, Nenly, SenseTime Education and all bloggers"
+  }
+};
+
+// 切换语言 + 本地存储
+function setLang(lang){
+  localStorage.setItem('siteLang', lang);
+  document.documentElement.lang = lang;
+  // 替换所有文字
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    let key = el.getAttribute('data-lang');
+    if(langData[lang][key]) el.innerHTML = langData[lang][key];
+  });
+  // 替换占位符
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el=>{
+    let key = el.getAttribute('data-lang-placeholder');
+    if(langData[lang][key]) el.placeholder = langData[lang][key];
+  });
+  // 关闭语言菜单
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+// 展开收起语言菜单
+function toggleLangMenu(){
+  let m = document.getElementById('langMenu');
+  m.style.display = m.style.display==='block' ? 'none' : 'block';
+}
+
+// 点击空白关闭语言菜单
+document.addEventListener('click',function(e){
+  let btn = document.querySelector('.lang-btn');
+  let menu = document.getElementById('langMenu');
+  if(!btn.contains(e.target) && !menu.contains(e.target)){
+    menu.style.display = 'none';
+  }
+});
+
+// 页面加载自动读取语言
+window.onload = function(){
+  let defLang = localStorage.getItem('siteLang') || 'zh';
+  setLang(defLang);
+
+  // 教学下拉菜单逻辑
+  let btn = document.querySelector('.dropbtn');
+  let menu = document.getElementById('teachMenu');
+  btn.onclick = function(e){
+    e.stopPropagation();
+    let rect = btn.getBoundingClientRect();
+    menu.style.left = rect.left + 'px';
+    menu.style.top = rect.bottom + 5 + 'px';
+    menu.style.display = menu.style.display==='block'?'none':'block';
+  };
+  document.onclick = function(){
+    menu.style.display = 'none';
+  };
+}
+</script>
 </body>
 </html>

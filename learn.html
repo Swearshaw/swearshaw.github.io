@@ -3,74 +3,457 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>学习资源 | AI教程学院</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
-<script src="js/lang.js" defer></script>
-<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}.resource-card{margin:30px 0;}.resource-card h2{color:#6366f1;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid #eee;}.link-item{display:block;padding:12px 16px;background:#f8f9ff;border-radius:12px;margin:10px 0;text-decoration:none;color:#2c3e50;transition:0.3s;}.link-item:hover{background:#6366f1;color:#fff;transform:translateX(6px);}</style>
+<title data-lang="title">今天你会用AI了么</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
+}
+nav {
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
+  z-index: 999999;
+  padding: 8px 0;
+}
+.nav-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #000;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex;
+  gap: 8px;
+}
+#searchInput {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 150px;
+}
+.search-bar button {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.lang-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* 语言下拉菜单 */
+#langMenu {
+  display:none; 
+  position: fixed; 
+  top:55px; 
+  right:20px; 
+  background:rgba(255,255,255,0.95); 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  width:120px; 
+  z-index:999999;
+  overflow: hidden;
+}
+#langMenu a {
+  display:block;
+  padding:10px 12px;
+  cursor:pointer;
+  color:#333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+#langMenu a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 6px 0;
+  width: 100%;
+  scrollbar-width: none;
+  position: relative;
+  overflow: visible !important;
+  z-index: 9999999 !important;
+}
+.nav-menu::-webkit-scrollbar {display:none;}
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  position: fixed !important;
+  z-index: 9999999 !important;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.dropdown-content span {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
+.section-card{
+  background:#fff;
+  border-radius:20px;
+  padding:25px 30px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+}
+.section-card h2{
+  margin-top:0;
+  margin-bottom:12px;
+  color:#222;
+}
+.section-card p{
+  margin:0;
+  color:#444;
+  line-height:1.7;
+}
+.section-card a{
+  display: block;
+  color: #6366f1;
+  word-break: break-all;
+  margin-top: 6px;
+}
+.container{
+  padding:30px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.container h1{
+  color:#fff;
+  margin-bottom:30px;
+  text-align:center;
+}
+footer{
+  color:#fff;
+  padding:20px 30px;
+  line-height:1.6;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+}
+</style>
 </head>
 <body>
 
-<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
-<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
-<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
-<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
-<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
-<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
-</div>
-</div>
-
 <nav>
-<div class="nav-wrap">
-<div class="logo" data-lang="logo">AI教程学院</div>
-<div class="nav-menu">
-<a href="index.html" data-lang="navHome">首页</a>
-<div class="dropdown">
-<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
-<div class="dropdown-content">
-<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
-<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
-<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
-</div>
-</div>
-<a href="tools.html" data-lang="navTools">工具合集</a>
-<a href="learn.html" data-lang="navLearn">学习资源</a>
-</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="搜索教程...">
-<button onclick="searchSite()">搜索</button>
-</div>
-</div>
+  <div class="nav-wrap">
+    <div class="nav-top">
+      <div class="logo" data-lang="logo">今天你会用AI了么</div>
+      <div class="nav-right">
+        <div class="search-bar">
+          <input id="searchInput" type="text" data-lang-placeholder="searchPlaceholder" placeholder="搜索教程...">
+          <button data-lang="searchBtn">搜索</button>
+        </div>
+        <button class="lang-btn" onclick="toggleLangMenu()">🌍 Language</button>
+      </div>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" data-lang="navIndex">首页</a>
+      <div class="dropdown">
+        <button class="dropbtn" data-lang="navTeach">使用教学 ▾</button>
+        <div class="dropdown-content" id="teachMenu">
+          <a href="basic.html" data-lang="menuBasic">基础使用 <span data-lang="menuBasicTip">适合首次接触AI工具</span></a>
+          <a href="advance.html" data-lang="menuAdvance">进阶使用 <span data-lang="menuAdvanceTip">适合个人学习/小型项目</span></a>
+          <a href="senior.html" data-lang="menuSenior">高级使用 <span data-lang="menuSeniorTip">适合大型项目编辑</span></a>
+        </div>
+      </div>
+      <a href="tools.html" data-lang="navTools">工具合集</a>
+      <a href="learn.html" data-lang="navLearn">学习资源</a>
+    </div>
+  </div>
 </nav>
 
+<!-- 语言菜单 -->
+<div id="langMenu">
+<a onclick="setLang('zh')">中文</a>
+<a onclick="setLang('ja')">日本語</a>
+<a onclick="setLang('en')">English</a>
+</div>
+
 <div class="container">
-<h1 data-lang="learn_title">📚 AI 全套学习资源库</h1>
+<h1 data-lang="pageTitle">AI全套学习资源汇总</h1>
 
-<div class="resource-card">
-<h2>一、零基础入门</h2>
-<a class="link-item" href="https://www.bilibili.com/video/BV1134y1d72L/" target="_blank">B 站《一次看懂人工智能》</a>
-<a class="link-item" href="https://www.bilibili.com/video/BV1EE411W7V3/" target="_blank">B 站《AI 101》</a>
-<a class="link-item" href="https://www.bilibili.com/video/BV12E411x7Hm/" target="_blank">B 站《小学生也能听懂的人工智能》</a>
+<div class="section-card">
+<h2 data-lang="r1">PyTorch 深度学习实践（CSDN，附源码）</h2>
+<p data-lang="d1">适合深度学习、Python、AI框架学习</p>
+<a href="https://blog.csdn.net/liluo_2951121599/article/details/137646669" target="_blank">https://blog.csdn.net/liluo_2951121599/article/details/137646669</a>
 </div>
 
-<div class="resource-card">
-<h2>二、AI 工具实操</h2>
-<a class="link-item" href="https://space.bilibili.com/1814756990/channel/collectiondetail?sid=1285674&ctype=0" target="_blank">B 站《SD 新手到大神 10 课》</a>
-<a class="link-item" href="https://www.waytoagi.com/question/84425" target="_blank">Stable Diffusion 保姆级教程</a>
+<div class="section-card">
+<h2 data-lang="r2">B 站《SD 新手到大神 10 课》（Nenly 同学）</h2>
+<p data-lang="d2">Stable Diffusion 从入门到精通</p>
+<a href="https://space.bilibili.com/1814756990/channel/collectiondetail?sid=1285674&ctype=0" target="_blank">https://space.bilibili.com/1814756990/channel/collectiondetail?sid=1285674&ctype=0</a>
 </div>
 
-<div class="resource-card">
-<h2>三、进阶系统学习</h2>
-<a class="link-item" href="https://developer.aliyun.com/article/1703532" target="_blank">深度学习入门：从神经网络到Transformer</a>
-<a class="link-item" href="https://blog.csdn.net/liluo_2951121599/article/details/137646669" target="_blank">PyTorch 深度学习实践（附源码）</a>
+<div class="section-card">
+<h2 data-lang="r3">B 站《Midjourney 提示词进阶：风格 / 构图 / 参数全解》</h2>
+<p data-lang="d3">AI绘画提示词高级教程</p>
+<a href="https://www.bilibili.com/video/BV1zK4y1s7QH/" target="_blank">https://www.bilibili.com/video/BV1zK4y1s7QH/</a>
+</div>
+
+<div class="section-card">
+<h2 data-lang="r4">《Stable Diffusion 安装与提示词入门保姆级教程》（WayToAGI）</h2>
+<p data-lang="d4">零基础安装与使用指南</p>
+<a href="https://www.waytoagi.com/question/84425" target="_blank">https://www.waytoagi.com/question/84425</a>
+</div>
+
+<div class="section-card">
+<h2 data-lang="r5">B 站《一次看懂人工智能》（科普中国）</h2>
+<p data-lang="d5">免费中文AI科普视频</p>
+<a href="https://www.bilibili.com/video/BV1134y1d72L/" target="_blank">https://www.bilibili.com/video/BV1134y1d72L/</a>
+</div>
+
+<div class="section-card">
+<h2 data-lang="r6">B 站《AI 101》（商汤教育）</h2>
+<p data-lang="d6">AI基础通识课程</p>
+<a href="https://www.bilibili.com/video/BV1EE411W7V3/" target="_blank">https://www.bilibili.com/video/BV1EE411W7V3/</a>
+</div>
+
+<div class="section-card">
+<h2 data-lang="r7">《AI 使用全攻略：从入门到精通的 12 个核心方法》（CSDN）</h2>
+<p data-lang="d7">通俗无代码实战文章</p>
+<a href="https://blog.csdn.net/2402_88251905/article/details/148541238" target="_blank">https://blog.csdn.net/2402_88251905/article/details/148541238</a>
+</div>
+
+<div class="section-card">
+<h2 data-lang="r8">《零基础学 AI—— 从入门到实践完全指南》（51CTO）</h2>
+<p data-lang="d8">零基础入门必读</p>
+<a href="https://blog.51cto.com/u_16349720/14539811" target="_blank">https://blog.51cto.com/u_16349720/14539811</a>
 </div>
 
 </div>
 
-<footer style="white-space:pre-line;line-height:1.6;">
-制作者Swearshaw
+<footer data-lang="footer">
+制作者Swearshaw<br>
 感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
-目前关于AI的使用教学较少，后续会继续寻找
 </footer>
+
+<script>
+// 中日英翻译包
+const langData = {
+  zh: {
+    title: "今天你会用AI了么",
+    logo: "今天你会用AI了么",
+    searchPlaceholder: "搜索教程...",
+    searchBtn: "搜索",
+    navIndex: "首页",
+    navTeach: "使用教学 ▾",
+    navTools: "工具合集",
+    navLearn: "学习资源",
+    menuBasic: "基础使用",
+    menuBasicTip: "适合首次接触AI工具",
+    menuAdvance: "进阶使用",
+    menuAdvanceTip: "适合个人学习/小型项目",
+    menuSenior: "高级使用",
+    menuSeniorTip: "适合大型项目编辑",
+    pageTitle: "AI全套学习资源汇总",
+    r1: "PyTorch 深度学习实践（CSDN，附源码）",
+    d1: "适合深度学习、Python、AI框架学习",
+    r2: "B 站《SD 新手到大神 10 课》（Nenly 同学）",
+    d2: "Stable Diffusion 从入门到精通",
+    r3: "B 站《Midjourney 提示词进阶：风格 / 构图 / 参数全解》",
+    d3: "AI绘画提示词高级教程",
+    r4: "《Stable Diffusion 安装与提示词入门保姆级教程》（WayToAGI）",
+    d4: "零基础安装与使用指南",
+    r5: "B 站《一次看懂人工智能》（科普中国）",
+    d5: "免费中文AI科普视频",
+    r6: "B 站《AI 101》（商汤教育）",
+    d6: "AI基础通识课程",
+    r7: "《AI 使用全攻略：从入门到精通的 12 个核心方法》（CSDN）",
+    d7: "通俗无代码实战文章",
+    r8: "《零基础学 AI—— 从入门到实践完全指南》（51CTO）",
+    d8: "零基础入门必读",
+    footer: "制作者Swearshaw<br>感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享"
+  },
+  ja: {
+    title: "AIを使いこなせますか",
+    logo: "AIを使いこなせますか",
+    searchPlaceholder: "チュートリアル検索...",
+    searchBtn: "検索",
+    navIndex: "ホーム",
+    navTeach: "使い方講座 ▾",
+    navTools: "ツール集",
+    navLearn: "学習リソース",
+    menuBasic: "基本操作",
+    menuBasicTip: "AI初心者向け",
+    menuAdvance: "中級活用",
+    menuAdvanceTip: "個人学習・小規模プロジェクト向け",
+    menuSenior: "上級応用",
+    menuSeniorTip: "大規模プロジェクト編集向け",
+    pageTitle: "AI学習リソース完全まとめ",
+    r1: "PyTorch 深層学習実践講座（CSDN）",
+    d1: "深層学習・Python・AIフレームワーク学習用",
+    r2: "Bilibili『SD初心者から神まで10講座』（Nenlyさん）",
+    d2: "Stable Diffusion 入門から精通まで",
+    r3: "Bilibili『Midjourney プロンプト上級講座』",
+    d3: "AI作画プロンプトテクニック",
+    r4: "Stable Diffusion インストール・使い方ガイド（WayToAGI）",
+    d4: "初心者向けインストール・操作ガイド",
+    r5: "Bilibili『人工知能を理解する』（科普中国）",
+    d5: "無料AI基礎解説動画",
+    r6: "Bilibili『AI 101』（商湯教育）",
+    d6: "AI基礎教養コース",
+    r7: "AI活用完全ガイド（CSDN）",
+    d7: "初心者向けノーコード実践記事",
+    r8: "ゼロから学ぶAI完全ガイド（51CTO）",
+    d8: "初心者必読入門書",
+    footer: "制作：Swearshaw<br>科普中国、Nenlyさん、商湯教育に感謝"
+  },
+  en: {
+    title: "Can You Use AI Today",
+    logo: "Can You Use AI Today",
+    searchPlaceholder: "Search tutorials...",
+    searchBtn: "Search",
+    navIndex: "Home",
+    navTeach: "Tutorials ▾",
+    navTools: "Tools",
+    navLearn: "Resources",
+    menuBasic: "Basic Use",
+    menuBasicTip: "For AI beginners",
+    menuAdvance: "Advanced Use",
+    menuAdvanceTip: "For study & small projects",
+    menuSenior: "Senior Use",
+    menuSeniorTip: "For large project editing",
+    pageTitle: "Complete AI Learning Resources",
+    r1: "PyTorch Deep Learning Practice (CSDN)",
+    d1: "For deep learning, Python, and AI frameworks",
+    r2: "Bilibili SD from Beginner to Pro (Nenly)",
+    d2: "Stable Diffusion full course",
+    r3: "Bilibili Midjourney Prompt Mastery",
+    d3: "AI art prompt advanced guide",
+    r4: "Stable Diffusion Install & Prompt Guide (WayToAGI)",
+    d4: "Zero-base install & usage tutorial",
+    r5: "Bilibili Understand AI (Science China)",
+    d5: "Free AI education videos",
+    r6: "Bilibili AI 101 (SenseTime Education)",
+    d6: "AI basic foundation course",
+    r7: "AI Complete Usage Guide (CSDN)",
+    d7: "Easy no-code practical article",
+    r8: "Zero Base AI Complete Guide (51CTO)",
+    d8: "Must-read for beginners",
+    footer: "Created by Swearshaw<br>Thanks to Science China, Nenly, SenseTime Education and all bloggers"
+  }
+};
+
+// 切换语言
+function setLang(lang) {
+  localStorage.setItem('siteLang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const key = el.getAttribute('data-lang');
+    if (langData[lang][key]) el.innerHTML = langData[lang][key];
+  });
+
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-lang-placeholder');
+    if (langData[lang][key]) el.placeholder = langData[lang][key];
+  });
+
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+// 显示/隐藏语言菜单
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+
+// 点击空白关闭
+document.addEventListener('click', function(e) {
+  const btn = document.querySelector('.lang-btn');
+  const menu = document.getElementById('langMenu');
+  if (!btn.contains(e.target) && !menu.contains(e.target)) menu.style.display = 'none';
+});
+
+// 初始化
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('siteLang') || 'zh';
+  setLang(saved);
+
+  // 原有下拉菜单
+  let btn = document.querySelector('.dropbtn');
+  let menu = document.getElementById('teachMenu');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    let rect = btn.getBoundingClientRect();
+    menu.style.left = rect.left + 'px';
+    menu.style.top = rect.bottom + 5 + 'px';
+    menu.style.display = menu.style.display == 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', function() {
+    menu.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html>

@@ -3,99 +3,820 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI工具合集 | AI教程学院</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
-<script src="js/lang.js" defer></script>
-<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}</style>
+<title data-lang="title">今天你会用AI了么</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
+}
+nav {
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
+  z-index: 999999;
+  padding: 8px 0;
+}
+.nav-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #000;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex;
+  gap: 8px;
+}
+#searchInput {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 150px;
+}
+.search-bar button {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.lang-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#langMenu {
+  display:none; 
+  position: fixed; 
+  top:55px; 
+  right:20px; 
+  background:rgba(255,255,255,0.95); 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  width:120px; 
+  z-index:999999;
+  overflow: hidden;
+}
+#langMenu a {
+  display:block;
+  padding:10px 12px;
+  cursor:pointer;
+  color:#333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+#langMenu a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 6px 0;
+  width: 100%;
+  scrollbar-width: none;
+  position: relative;
+  overflow: visible !important;
+  z-index: 9999999 !important;
+}
+.nav-menu::-webkit-scrollbar {display:none;}
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  position: fixed !important;
+  z-index: 9999999 !important;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.dropdown-content span {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
+.tools-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.tool-card{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+}
+.tool-card h3{
+  margin:0 0 10px;
+  font-size:17px;
+  color:#222;
+}
+.tool-card .tag{
+  display:inline-block;
+  font-size:12px;
+  color:#6366f1;
+  background:#eef2ff;
+  padding:2px 6px;
+  border-radius:4px;
+  margin-bottom:8px;
+}
+.tool-card p{
+  margin:0 0 10px;
+  font-size:14px;
+  line-height:1.6;
+  color:#444;
+}
+.tool-card .price{
+  font-size:13px;
+  color:#c03939;
+  margin-bottom:8px;
+  font-weight:bold;
+}
+.tool-card .btn{
+  display: inline-block;
+  margin-top:6px;
+  padding:8px 16px;
+  background:#6366f1;
+  color:#fff;
+  border-radius:8px;
+  font-size:14px;
+  text-decoration:none;
+}
+.cat-title{
+  color:#fff;
+  font-size:22px;
+  margin:30px 0 16px;
+  grid-column:1/-1;
+}
+.match-box{
+  background:#fff;
+  border-radius:16px;
+  padding:20px;
+  margin-top:20px;
+  grid-column:1/-1;
+}
+.match-box h3{
+  color:#222;
+  margin-bottom:10px;
+}
+.match-box p{
+  font-size:14px;
+  color:#444;
+  line-height:1.7;
+}
+.container{
+  padding:30px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.container h1{
+  color:#fff;
+  margin-bottom:20px;
+  text-align:center;
+}
+footer{
+  color:#fff;
+  padding:20px 30px;
+  line-height:1.6;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+}
+@media(max-width:768px){
+  .tools-grid{grid-template-columns:1fr;}
+}
+</style>
 </head>
 <body>
 
-<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
-<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
-<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
-<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
-<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
-<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
-</div>
-</div>
-
 <nav>
-<div class="nav-wrap">
-<div class="logo" data-lang="logo">AI教程学院</div>
-<div class="nav-menu">
-<a href="index.html" data-lang="navHome">首页</a>
-<div class="dropdown">
-<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
-<div class="dropdown-content">
-<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
-<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
-<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
-</div>
-</div>
-<a href="tools.html" data-lang="navTools">工具合集</a>
-<a href="learn.html" data-lang="navLearn">学习资源</a>
-</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="搜索教程...">
-<button onclick="searchSite()">搜索</button>
-</div>
-</div>
+  <div class="nav-wrap">
+    <div class="nav-top">
+      <div class="logo" data-lang="logo">今天你会用AI了么</div>
+      <div class="nav-right">
+        <div class="search-bar">
+          <input id="searchInput" type="text" data-lang-placeholder="searchPlaceholder" placeholder="搜索教程...">
+          <button data-lang="searchBtn">搜索</button>
+        </div>
+        <button class="lang-btn" onclick="toggleLangMenu()">🌍 Language</button>
+      </div>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" data-lang="navIndex">首页</a>
+      <div class="dropdown">
+        <button class="dropbtn" data-lang="navTeach">使用教学 ▾</button>
+        <div class="dropdown-content" id="teachMenu">
+          <a href="basic.html" data-lang="menuBasic">基础使用 <span data-lang="menuBasicTip">适合首次接触AI工具</span></a>
+          <a href="advance.html" data-lang="menuAdvance">进阶使用 <span data-lang="menuAdvanceTip">适合个人学习/小型项目</span></a>
+          <a href="senior.html" data-lang="menuSenior">高级使用 <span data-lang="menuSeniorTip">适合大型项目编辑</span></a>
+        </div>
+      </div>
+      <a href="tools.html" data-lang="navTools">工具合集</a>
+      <a href="learn.html" data-lang="navLearn">学习资源</a>
+    </div>
+  </div>
 </nav>
 
+<div id="langMenu">
+<a onclick="setLang('zh')">中文</a>
+<a onclick="setLang('ja')">日本語</a>
+<a onclick="setLang('en')">English</a>
+</div>
+
 <div class="container">
-<h1 data-lang="tools_title">🤖 AI 热门工具合集</h1>
-<div class="card-grid">
+  <h1 data-lang="pageTitle">AI工具大全（2026最新完整版）</h1>
+  <div class="tools-grid">
 
-<div class="card">
-<h3>💬 ChatGPT</h3>
-<p>通用对话AI，适合写作、学习、编程、思路梳理，全球使用率极高。</p>
-<a href="https://chat.openai.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
+    <h2 class="cat-title" data-lang="cate1">一、通用对话大模型（日常/创作/科研首选）</h2>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagOversea">海外</span>
+      <h3>ChatGPT（OpenAI GPT-5.4）</h3>
+      <p data-lang="chatgpt1">优势：综合能力最强、多模态融合、插件生态丰富。</p>
+      <p data-lang="chatgpt2">适用：日常问答、文案/代码生成、翻译、数据分析。</p>
+      <p class="price" data-lang="priceFree">价格：免费版可用，Plus版 $20/月</p>
+      <a href="https://chat.openai.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagOversea">海外</span>
+      <h3>Claude（Anthropic Opus 4.6）</h3>
+      <p data-lang="claude1">优势：200K超长上下文、逻辑强、安全合规。</p>
+      <p data-lang="claude2">适用：长文档总结、学术写作、法律/科研深度分析。</p>
+      <p class="price" data-lang="priceFree2">价格：免费版可用，Pro版 $20/月</p>
+      <a href="https://claude.ai" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagOversea">海外</span>
+      <h3>Gemini（Google 3.1 Pro）</h3>
+      <p data-lang="gemini1">优势：多模态（图文音视频）强、搜索联动、实时信息准。</p>
+      <p data-lang="gemini2">适用：创意内容、多媒体理解、实时资讯整合。</p>
+      <p class="price" data-lang="priceFreeOnly">价格：免费版可用</p>
+      <a href="https://gemini.google.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagCn">国产</span>
+      <h3>豆包（字节跳动）</h3>
+      <p data-lang="doubao1">优势：中文自然、生成快、短视频/营销文案强、免费额度足。</p>
+      <p data-lang="doubao2">适用：日常聊天、文案创作、学习辅导、短视频脚本。</p>
+      <p class="price" data-lang="priceMainFree">价格：免费版为主</p>
+      <a href="https://www.doubao.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagCn">国产</span>
+      <h3>DeepSeek V4</h3>
+      <p data-lang="deepseek1">优势：开源免费、中文适配好、数理/代码能力强。</p>
+      <p data-lang="deepseek2">适用：技术问题、长文档、本地部署、性价比优先。</p>
+      <p class="price" data-lang="priceOpen">价格：免费开源</p>
+      <a href="https://www.deepseek.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagCn">国产</span>
+      <h3>通义千问 3.6（阿里）</h3>
+      <p data-lang="tongyi1">优势：阿里生态、商业内容/PPT强、API便宜。</p>
+      <p data-lang="tongyi2">适用：职场办公、商业文案、数据可视化、阿里云用户。</p>
+      <p class="price" data-lang="priceEnough">价格：免费额度充足</p>
+      <a href="https://tongyi.aliyun.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <span class="tag" data-lang="tagCn">国产</span>
+      <h3>Kimi 2.5（Moonshot）</h3>
+      <p data-lang="kimi1">优势：200万Token超长上下文、文献/论文处理无敌、科研神器。</p>
+      <p data-lang="kimi2">适用：学术研究、论文综述、书籍总结、法律文档分析。</p>
+      <p class="price" data-lang="priceFreeOnly">价格：免费版可用</p>
+      <a href="https://kimi.moonshot.cn" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <h2 class="cat-title" data-lang="cate2">二、图像生成（设计/插画/营销必备）</h2>
+
+    <div class="tool-card">
+      <h3>Midjourney V7</h3>
+      <p data-lang="mj1">地位：AI绘画天花板、艺术质感最强、细节顶级。</p>
+      <p data-lang="mj2">适用：设计师、插画师、概念设计、艺术创作。</p>
+      <p class="price" data-lang="priceMj">价格：$10/月起（Discord使用）</p>
+      <a href="https://www.midjourney.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>DALL-E 3（OpenAI）</h3>
+      <p data-lang="dalle1">优势：风格多样、ChatGPT集成、中文提示词友好、版权清晰。</p>
+      <p data-lang="dalle2">适用：日常配图、营销素材、简单设计、快速出图。</p>
+      <p class="price" data-lang="priceDalle">价格：包含在ChatGPT Plus内</p>
+      <a href="https://openai.com/dall-e-3" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>Stable Diffusion（开源）</h3>
+      <p data-lang="sd1">优势：免费开源、可本地部署、插件丰富、高度定制。</p>
+      <p data-lang="sd2">适用：技术玩家、设计师、自定义模型、商业部署。</p>
+      <p class="price" data-lang="priceOpen">价格：免费开源</p>
+      <a href="https://stablediffusionweb.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>即梦（字节跳动）</h3>
+      <p data-lang="jimeng1">优势：东方美学强、中文理解准、国风/国潮效果好、免费额度足。</p>
+      <p data-lang="jimeng2">适用：国内创作者、电商设计、国风插画、社交媒体配图。</p>
+      <p class="price" data-lang="priceEnough">价格：免费额度充足</p>
+      <a href="https://jimeng.jianying.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <h2 class="cat-title" data-lang="cate3">三、视频生成（2026最爆发赛道）</h2>
+
+    <div class="tool-card">
+      <h3>Sora（OpenAI）</h3>
+      <p data-lang="sora1">优势：最长60秒、画质最真实、运动理解强、细节顶级。</p>
+      <p data-lang="sora2">适用：影视级短片、产品演示、创意视频、真实感内容。</p>
+      <p class="price" data-lang="priceSora">价格：尚未开放公测</p>
+      <a href="https://openai.com/sora" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>Runway（Gen-3）</h3>
+      <p data-lang="runway1">优势：专业创作首选、影视工作流成熟、精准控制。</p>
+      <p data-lang="runway2">适用：视频创作者、广告制作、影视后期、专业内容生产。</p>
+      <p class="price" data-lang="priceRunway">价格：免费额度+付费套餐</p>
+      <a href="https://runwayml.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>Pika（Pika Labs）</h3>
+      <p data-lang="pika1">优势：操作简单、新手友好、创意玩法多、动态自然。</p>
+      <p data-lang="pika2">适用：个人创作者、短视频、动漫/漫画风格、快速创意实现。</p>
+      <p class="price" data-lang="pricePika">价格：免费试用</p>
+      <a href="https://pika.art" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>可灵 AI（快手）</h3>
+      <p data-lang="keling1">优势：国产最强、动态自然度顶尖、AI短剧/漫剧成熟。</p>
+      <p data-lang="keling2">适用：国内创作者、短视频、AI短剧、电商视频、内容量产。</p>
+      <p class="price" data-lang="priceKeling">价格：免费+付费会员</p>
+      <a href="https://www.kelingai.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <h2 class="cat-title" data-lang="cate4">四、编程开发（程序员效率翻倍）</h2>
+
+    <div class="tool-card">
+      <h3>GitHub Copilot</h3>
+      <p data-lang="copilot1">优势：IDE深度集成、实时代码补全、全语言支持。</p>
+      <p data-lang="copilot2">适用：程序员、全栈开发、快速编码、日常开发提效。</p>
+      <p class="price" data-lang="priceCopilot">价格：$10/月</p>
+      <a href="https://github.com/features/copilot" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>Claude Code</h3>
+      <p data-lang="claudecode1">优势：代码解释清晰、跨项目理解强、调试能力好、学习神器。</p>
+      <p data-lang="claudecode2">适用：新手程序员、代码学习、复杂项目理解、技术文档生成。</p>
+      <p class="price" data-lang="priceInclude">价格：包含在Claude内</p>
+      <a href="https://claude.ai" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>通义灵码（阿里）</h3>
+      <p data-lang="lingma1">优势：中文注释友好、阿里云生态、国内访问快、免费额度足。</p>
+      <p data-lang="lingma2">适用：国内开发者、Java/Go开发、云原生应用。</p>
+      <p class="price" data-lang="priceFreeOnly">价格：免费</p>
+      <a href="https://tongyi.aliyun.com/lingma" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <h2 class="cat-title" data-lang="cate5">五、办公提效（职场人必备）</h2>
+
+    <div class="tool-card">
+      <h3>WPS AI</h3>
+      <p data-lang="wps1">优势：深度集成Word/Excel/PPT、中文优化、模板丰富。</p>
+      <p data-lang="wps2">适用：职场办公、文档生成、数据处理、PPT美化。</p>
+      <p class="price" data-lang="priceWps">价格：免费基础功能</p>
+      <a href="https://ai.wps.cn" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>飞书 AI</h3>
+      <p data-lang="feishu1">优势：协作流程智能优化、会议总结、文档协同、企业级安全。</p>
+      <p data-lang="feishu2">适用：团队协作、远程会议、知识管理、企业办公。</p>
+      <p class="price" data-lang="priceFeishu">价格：随飞书套餐</p>
+      <a href="https://www.feishu.cn" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>ChatExcel</h3>
+      <p data-lang="chatexcel1">优势：自然语言操作表格、告别复杂公式、数据可视化。</p>
+      <p data-lang="chatexcel2">适用：Excel重度用户、数据分析师、财务/运营、报表制作。</p>
+      <p class="price" data-lang="priceFreeOnly">价格：免费版可用</p>
+      <a href="https://chatexcel.com" target="_blank" class="btn" data-lang="enterBtn">点击进入官网</a>
+    </div>
+
+    <div class="match-box">
+      <h3 data-lang="matchTitle">六、选型速配（按需求直接选）</h3>
+      <p data-lang="p1">日常全能：豆包（免费）+ ChatGPT Plus（进阶）</p>
+      <p data-lang="p2">中文创作：豆包 + 通义千问</p>
+      <p data-lang="p3">长文档 / 科研：Claude + Kimi</p>
+      <p data-lang="p4">设计插画：Midjourney（艺术）+ 即梦（国风）</p>
+      <p data-lang="p5">视频创作：Runway（专业）+ 可灵 AI（国产）</p>
+      <p data-lang="p6">编程开发：GitHub Copilot + Claude Code</p>
+      <p data-lang="p7">办公提效：WPS AI + 飞书 AI</p>
+    </div>
+
+  </div>
 </div>
 
-<div class="card">
-<h3>🧠 文心一言</h3>
-<p>国内主流AI，支持文档解析、多模态对话、办公辅助、知识问答。</p>
-<a href="https://yiyan.baidu.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
-</div>
-
-<div class="card">
-<h3>🎨 Midjourney</h3>
-<p>专业AI绘图工具，通过提示词生成插画、场景、人物、艺术作品。</p>
-<a href="https://www.midjourney.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
-</div>
-
-<div class="card">
-<h3>📝 通义千问</h3>
-<p>阿里大模型，适合办公写作、数据分析、长文档解读、日常问答。</p>
-<a href="https://tongyi.aliyun.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
-</div>
-
-<div class="card">
-<h3>🔍 Kimi 智能助手</h3>
-<p>超长文本解析、论文阅读、资料整理，适合学生和办公人群。</p>
-<a href="https://kimi.moonshot.cn" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
-</div>
-
-<div class="card">
-<h3>⚙️ Coze 扣子</h3>
-<p>AI工作流搭建、自定义机器人，零基础也能做自动化AI应用。</p>
-<a href="https://www.coze.cn" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
-</div>
-
-<div class="card">
-<h3>🧩 豆包</h3>
-<p>字节跳动出品的AI助手，支持多模态对话、内容创作、智能问答，体验流畅。</p>
-<a href="https://www.doubao.com" target="_blank" class="btn" data-lang="btn_go">前往官网</a>
-</div>
-
-</div>
-</div>
-
-<footer style="white-space:pre-line;line-height:1.6;">
-制作者Swearshaw
+<footer data-lang="footer">
+制作者Swearshaw<br>
 感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
-目前关于AI的使用教学较少，后续会继续寻找
 </footer>
+
+<script>
+const langData = {
+  zh: {
+    title: "今天你会用AI了么",
+    logo: "今天你会用AI了么",
+    searchPlaceholder: "搜索教程...",
+    searchBtn: "搜索",
+    navIndex: "首页",
+    navTeach: "使用教学 ▾",
+    navTools: "工具合集",
+    navLearn: "学习资源",
+    menuBasic: "基础使用",
+    menuBasicTip: "适合首次接触AI工具",
+    menuAdvance: "进阶使用",
+    menuAdvanceTip: "适合个人学习/小型项目",
+    menuSenior: "高级使用",
+    menuSeniorTip: "适合大型项目编辑",
+    pageTitle: "AI工具大全（2026最新完整版）",
+    tagOversea: "海外",
+    tagCn: "国产",
+    enterBtn: "点击进入官网",
+    priceFree: "价格：免费版可用，Plus版 $20/月",
+    priceFree2: "价格：免费版可用，Pro版 $20/月",
+    priceFreeOnly: "价格：免费版可用",
+    priceMainFree: "价格：免费版为主",
+    priceOpen: "价格：免费开源",
+    priceEnough: "价格：免费额度充足",
+    priceMj: "价格：$10/月起（Discord使用）",
+    priceDalle: "价格：包含在ChatGPT Plus内",
+    priceSora: "价格：尚未开放公测",
+    priceRunway: "价格：免费额度+付费套餐",
+    pricePika: "价格：免费试用",
+    priceKeling: "价格：免费+付费会员",
+    priceCopilot: "价格：$10/月",
+    priceInclude: "价格：包含在Claude内",
+    priceWps: "价格：免费基础功能",
+    priceFeishu: "价格：随飞书套餐",
+    cate1: "一、通用对话大模型（日常/创作/科研首选）",
+    cate2: "二、图像生成（设计/插画/营销必备）",
+    cate3: "三、视频生成（2026最爆发赛道）",
+    cate4: "四、编程开发（程序员效率翻倍）",
+    cate5: "五、办公提效（职场人必备）",
+    matchTitle: "六、选型速配（按需求直接选）",
+    p1: "日常全能：豆包（免费）+ ChatGPT Plus（进阶）",
+    p2: "中文创作：豆包 + 通义千问",
+    p3: "长文档 / 科研：Claude + Kimi",
+    p4: "设计插画：Midjourney（艺术）+ 即梦（国风）",
+    p5: "视频创作：Runway（专业）+ 可灵 AI（国产）",
+    p6: "编程开发：GitHub Copilot + Claude Code",
+    p7: "办公提效：WPS AI + 飞书 AI",
+    chatgpt1: "优势：综合能力最强、多模态融合、插件生态丰富。",
+    chatgpt2: "适用：日常问答、文案/代码生成、翻译、数据分析。",
+    claude1: "优势：200K超长上下文、逻辑强、安全合规。",
+    claude2: "适用：长文档总结、学术写作、法律/科研深度分析。",
+    gemini1: "优势：多模态（图文音视频）强、搜索联动、实时信息准。",
+    gemini2: "适用：创意内容、多媒体理解、实时资讯整合。",
+    doubao1: "优势：中文自然、生成快、短视频/营销文案强、免费额度足。",
+    doubao2: "适用：日常聊天、文案创作、学习辅导、短视频脚本。",
+    deepseek1: "优势：开源免费、中文适配好、数理/代码能力强。",
+    deepseek2: "适用：技术问题、长文档、本地部署、性价比优先。",
+    tongyi1: "优势：阿里生态、商业内容/PPT强、API便宜。",
+    tongyi2: "适用：职场办公、商业文案、数据可视化、阿里云用户。",
+    kimi1: "优势：200万Token超长上下文、文献/论文处理无敌、科研神器。",
+    kimi2: "适用：学术研究、论文综述、书籍总结、法律文档分析。",
+    mj1: "地位：AI绘画天花板、艺术质感最强、细节顶级。",
+    mj2: "适用：设计师、插画师、概念设计、艺术创作。",
+    dalle1: "优势：风格多样、ChatGPT集成、中文提示词友好、版权清晰。",
+    dalle2: "适用：日常配图、营销素材、简单设计、快速出图。",
+    sd1: "优势：免费开源、可本地部署、插件丰富、高度定制。",
+    sd2: "适用：技术玩家、设计师、自定义模型、商业部署。",
+    jimeng1: "优势：东方美学强、中文理解准、国风/国潮效果好、免费额度足。",
+    jimeng2: "适用：国内创作者、电商设计、国风插画、社交媒体配图。",
+    sora1: "优势：最长60秒、画质最真实、运动理解强、细节顶级。",
+    sora2: "适用：影视级短片、产品演示、创意视频、真实感内容。",
+    runway1: "优势：专业创作首选、影视工作流成熟、精准控制。",
+    runway2: "适用：视频创作者、广告制作、影视后期、专业内容生产。",
+    pika1: "优势：操作简单、新手友好、创意玩法多、动态自然。",
+    pika2: "适用：个人创作者、短视频、动漫/漫画风格、快速创意实现。",
+    keling1: "优势：国产最强、动态自然度顶尖、AI短剧/漫剧成熟。",
+    keling2: "适用：国内创作者、短视频、AI短剧、电商视频、内容量产。",
+    copilot1: "优势：IDE深度集成、实时代码补全、全语言支持。",
+    copilot2: "适用：程序员、全栈开发、快速编码、日常开发提效。",
+    claudecode1: "优势：代码解释清晰、跨项目理解强、调试能力好、学习神器。",
+    claudecode2: "适用：新手程序员、代码学习、复杂项目理解、技术文档生成。",
+    lingma1: "优势：中文注释友好、阿里云生态、国内访问快、免费额度足。",
+    lingma2: "适用：国内开发者、Java/Go开发、云原生应用。",
+    wps1: "优势：深度集成Word/Excel/PPT、中文优化、模板丰富。",
+    wps2: "适用：职场办公、文档生成、数据处理、PPT美化。",
+    feishu1: "优势：协作流程智能优化、会议总结、文档协同、企业级安全。",
+    feishu2: "适用：团队协作、远程会议、知识管理、企业办公。",
+    chatexcel1: "优势：自然语言操作表格、告别复杂公式、数据可视化。",
+    chatexcel2: "适用：Excel重度用户、数据分析师、财务/运营、报表制作。",
+    footer: "制作者Swearshaw<br>感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享"
+  },
+  ja: {
+    title: "AIを使いこなせますか",
+    logo: "AIを使いこなせますか",
+    searchPlaceholder: "チュートリアル検索...",
+    searchBtn: "検索",
+    navIndex: "ホーム",
+    navTeach: "使い方講座 ▾",
+    navTools: "ツール集",
+    navLearn: "学習リソース",
+    menuBasic: "基本操作",
+    menuBasicTip: "AI初心者向け",
+    menuAdvance: "中級活用",
+    menuAdvanceTip: "個人学習・小規模プロジェクト向け",
+    menuSenior: "上級応用",
+    menuSeniorTip: "大規模プロジェクト編集向け",
+    pageTitle: "AIツール総合リスト（2026最新版）",
+    tagOversea: "海外",
+    tagCn: "中国製",
+    enterBtn: "公式サイトへ",
+    priceFree: "料金：無料版利用可、Plus $20/月",
+    priceFree2: "料金：無料版利用可、Pro $20/月",
+    priceFreeOnly: "料金：無料版利用可",
+    priceMainFree: "料金：基本無料",
+    priceOpen: "料金：無料オープンソース",
+    priceEnough: "料金：無料枠十分",
+    priceMj: "料金：$10/月～（Discord利用）",
+    priceDalle: "料金：ChatGPT Plusに含む",
+    priceSora: "料金：公開前",
+    priceRunway: "料金：無料枠＋有料プラン",
+    pricePika: "料金：無料トライアル",
+    priceKeling: "料金：無料＋会員プラン",
+    priceCopilot: "料金：$10/月",
+    priceInclude: "料金：Claudeに含む",
+    priceWps: "料金：基本機能無料",
+    priceFeishu: "料金：プランに依存",
+    cate1: "一、汎用対話LLM（日常・創作・研究推奨）",
+    cate2: "二、画像生成（デザイン・イラスト・マーケティング必須）",
+    cate3: "三、動画生成（2026注目分野）",
+    cate4: "四、プログラミング開発（開発効率大幅UP）",
+    cate5: "五、オフィス効率化（ビジネスマン必携）",
+    matchTitle: "六、用途別推奨ツール",
+    p1: "万能汎用：豆包（無料）+ ChatGPT Plus（上級）",
+    p2: "中国語創作：豆包 + 通義千問",
+    p3: "長文書・研究：Claude + Kimi",
+    p4: "デザイン・イラスト：Midjourney（芸術）+ 即夢（中国風）",
+    p5: "動画制作：Runway（プロ）+ 可灵AI（中国製）",
+    p6: "プログラミング：GitHub Copilot + Claude Code",
+    p7: "オフィス効率：WPS AI + 飛書AI",
+    chatgpt1: "特長：総合能力最強・マルチモーダル統合・プラグイン豊富。",
+    chatgpt2: "用途：日常質問・文章/コード作成・翻訳・データ分析。",
+    claude1: "特長：200K長文コンテキスト・論理力高・安全性優秀。",
+    claude2: "用途：長文要約・学術執筆・法律・研究深層分析。",
+    gemini1: "特長：マルチモーダル強・検索連携・リアルタイム情報正確。",
+    gemini2: "用途：クリエイティブ制作・マルチメディア理解・最新情報整理。",
+    doubao1: "特長：中国語自然・生成高速・ショート動画文案得意・無料枠豊富。",
+    doubao2: "用途：日常会話・文案作成・学習補助・ショート動画台本。",
+    deepseek1: "特長：オープンソース無料・中国語適応良好・数理・コード能力強。",
+    deepseek2: "用途：技術質問・長文処理・ローカル導入・コスト重視。",
+    tongyi1: "特長：アリエコシステム・商用文章/PPT得意・API低価格。",
+    tongyi2: "用途：オフィス業務・商用文案・データ可視化・Alibabaユーザー。",
+    kimi1: "特長：200万トークン長文対応・論文文献処理最強・研究必須ツール。",
+    kimi2: "用途：学術研究・論文総括・書籍要約・法律文書分析。",
+    mj1: "位置：AIイラスト最高峰・芸術的質感最高・描写細部完璧。",
+    mj2: "用途：デザイナー・イラストレーター・コンセプトデザイン・芸術創作。",
+    dalle1: "特長：多様なスタイル・ChatGPT連携・中国語プロンプト対応・著作権安心。",
+    dalle2: "用途：日常挿絵・マーケティング素材・簡単デザイン・高速作画。",
+    sd1: "特長：無料オープンソース・ローカル導入可・プラグイン豊富・高カスタマイズ。",
+    sd2: "用途：技術愛好家・デザイナー・自作モデル・商用運用。",
+    jimeng1: "特長：東洋美学得意・中国語理解高精度・中国風イラスト優秀・無料枠十分。",
+    jimeng2: "用途：国内クリエイター・ECデザイン・中国風イラスト・SNS素材。",
+    sora1: "特長：最長60秒・画質リアル・動きの理解力高・細部描写優秀。",
+    sora2: "用途：映画級ショート動画・商品デモ・クリエイティブ動画・リアル系コンテンツ。",
+    runway1: "特長：プロクリエイター推奨・映像制作ワークフロー完備・精密制御可能。",
+    runway2: "用途：動画クリエイター・広告制作・映像編集・プロ向けコンテンツ生産。",
+    pika1: "特長：操作簡単初心者向け・創作バリエーション豊富・自然な動き。",
+    pika2: "用途：個人クリエイター・ショート動画・アニメ風・アイデア高速具現化。",
+    keling1: "特長：中国製最強・自然な動きトップクラス・AIショートドラマ成熟。",
+    keling2: "用途：国内クリエイター・ショート動画・AIドラマ・EC動画・大量生産。",
+    copilot1: "特長：IDE深く統合・リアルタイム補完・全言語対応。",
+    copilot2: "用途：プログラマー・フルスタック開発・高速コーディング・開発効率化。",
+    claudecode1: "特長：コード解説丁寧・複数プロジェクト理解・デバッグ得意・学習に最適。",
+    claudecode2: "用途：初心者プログラマー・コード学習・複雑プロジェクト理解・技術ドキュメント作成。",
+    lingma1: "特長：中国語コメント親切・Alibabaクラウドエコ・国内高速アクセス・無料枠豊富。",
+    lingma2: "用途：国内開発者・Java/Go開発・クラウドネイティブアプリ。",
+    wps1: "特長：Word/Excel/PPT完全統合・中国語最適化・テンプレ豊富。",
+    wps2: "用途：オフィス業務・文書作成・データ処理・PPT美化。",
+    feishu1: "特長：コラボ業務最適化・会議要約・文書同時編集・企業級セキュリティ。",
+    feishu2: "用途：チーム協業・リモート会議・知識管理・企業オフィス。",
+    chatexcel1: "特長：自然言語で表操作・複雑数式不要・データ可視化容易。",
+    chatexcel2: "用途：Excel常用者・データ分析・財務/運用・レポート作成。",
+    footer: "制作：Swearshaw<br>科普中国、Nenlyさん、商湯教育に感謝"
+  },
+  en: {
+    title: "Can You Use AI Today",
+    logo: "Can You Use AI Today",
+    searchPlaceholder: "Search tutorials...",
+    searchBtn: "Search",
+    navIndex: "Home",
+    navTeach: "Tutorials ▾",
+    navTools: "Tools",
+    navLearn: "Resources",
+    menuBasic: "Basic Use",
+    menuBasicTip: "For AI beginners",
+    menuAdvance: "Advanced Use",
+    menuAdvanceTip: "For study & small projects",
+    menuSenior: "Senior Use",
+    menuSeniorTip: "For large project editing",
+    pageTitle: "AI Tools Collection 2026",
+    tagOversea: "Oversea",
+    tagCn: "China",
+    enterBtn: "Official Site",
+    priceFree: "Price: Free available, Plus $20/month",
+    priceFree2: "Price: Free available, Pro $20/month",
+    priceFreeOnly: "Price: Free version available",
+    priceMainFree: "Price: Mostly free",
+    priceOpen: "Price: Free & Open Source",
+    priceEnough: "Price: Sufficient free quota",
+    priceMj: "Price: $10/month start (Discord)",
+    priceDalle: "Price: Included in ChatGPT Plus",
+    priceSora: "Price: Not open to public yet",
+    priceRunway: "Price: Free quota + Paid plan",
+    pricePika: "Price: Free trial",
+    priceKeling: "Price: Free + Membership",
+    priceCopilot: "Price: $10/month",
+    priceInclude: "Price: Included in Claude",
+    priceWps: "Price: Basic functions free",
+    priceFeishu: "Price: Depends on plan",
+    cate1: "1. General LLM (Daily / Creation / Research)",
+    cate2: "2. Image Generation (Design / Illustration / Marketing)",
+    cate3: "3. Video Generation (Hot Track 2026)",
+    cate4: "4. Programming & Development",
+    cate5: "5. Office Efficiency Tools",
+    matchTitle: "6. Quick Selection Guide",
+    p1: "Daily All-round: Doubao(Free) + ChatGPT Plus(Advanced)",
+    p2: "Chinese Creation: Doubao + Tongyi Qianwen",
+    p3: "Long Document / Research: Claude + Kimi",
+    p4: "Design & Art: Midjourney(Art) + Jimeng(Chinese Style)",
+    p5: "Video Creation: Runway(Pro) + Keling AI(China)",
+    p6: "Coding: GitHub Copilot + Claude Code",
+    p7: "Office: WPS AI + Feishu AI",
+    chatgpt1: "Advantage: Strongest overall, multi-modal, rich plugins.",
+    chatgpt2: "Use: Q&A, writing/code, translation, data analysis.",
+    claude1: "Advantage: 200K long context, strong logic, safe & compliant.",
+    claude2: "Use: Long document summary, academic writing, legal & research analysis.",
+    gemini1: "Advantage: Great multi-modal, search integrated, real-time info.",
+    gemini2: "Use: Creative content, media understanding, news summary.",
+    doubao1: "Advantage: Natural Chinese, fast generation, good for marketing scripts.",
+    doubao2: "Use: Chatting, writing, study help, short video scripts.",
+    deepseek1: "Advantage: Open source, good Chinese, strong math & coding.",
+    deepseek2: "Use: Tech questions, long docs, local deployment, cost-effective.",
+    tongyi1: "Advantage: Alibaba ecosystem, good at business PPT & copywriting.",
+    tongyi2: "Use: Office work, business content, data visualization, Alibaba users.",
+    kimi1: "Advantage: 2M token long context, perfect for papers & books.",
+    kimi2: "Use: Academic research, paper review, book summary, legal docs.",
+    mj1: "Rank: Top-tier AI art, best artistic texture and details.",
+    mj2: "Use: Designers, illustrators, concept art, creative works.",
+    dalle1: "Advantage: Various styles, ChatGPT integrated, friendly Chinese prompt.",
+    dalle2: "Use: Daily illustration, marketing material, quick design.",
+    sd1: "Advantage: Free open-source, local deployable, highly customizable.",
+    sd2: "Use: Developers, designers, custom model, commercial usage.",
+    jimeng1: "Advantage: Great oriental style, accurate Chinese understanding.",
+    jimeng2: "Use: Chinese creators, e-commerce design, traditional art illustration.",
+    sora1: "Advantage: Up to 60s, realistic quality, excellent motion understanding.",
+    sora2: "Use: Film clips, product demo, creative video, realistic content.",
+    runway1: "Advantage: Professional workflow, precise control for creators.",
+    runway2: "Use: Video creation, ads, post-production, professional content.",
+    pika1: "Advantage: Easy to use, creative styles, smooth motion.",
+    pika2: "Use: Individual creators, short video, anime style, fast ideas.",
+    keling1: "Advantage: Top domestic AI, smooth motion, mature AI drama.",
+    keling2: "Use: Chinese creators, short video, AI drama, e-commerce video.",
+    copilot1: "Advantage: IDE integration, real-time completion, full language support.",
+    copilot2: "Use: Programmers, full-stack development, speed up coding.",
+    claudecode1: "Advantage: Clear code explanation, cross-project understanding.",
+    claudecode2: "Use: Beginner coders, project comprehension, tech docs.",
+    lingma1: "Advantage: Chinese comment friendly, fast access in China.",
+    lingma2: "Use: Domestic developers, Java/Go, cloud native apps.",
+    wps1: "Advantage: Deep Word/Excel/PPT integration, rich templates.",
+    wps2: "Use: Office work, document generation, data process, PPT design.",
+    feishu1: "Advantage: Team collaboration, meeting summary, enterprise security.",
+    feishu2: "Use: Team work, remote meeting, knowledge management.",
+    chatexcel1: "Advantage: Operate table with plain language, no complex formula.",
+    chatexcel2: "Use: Excel users, data analyst, finance & operation reports.",
+    footer: "Created by Swearshaw<br>Thanks to Science China, Nenly, SenseTime Education and all bloggers"
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem('siteLang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const k = el.getAttribute('data-lang');
+    if(langData[lang][k]) el.innerHTML = langData[lang][k];
+  });
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-lang-placeholder');
+    if(langData[lang][k]) el.placeholder = langData[lang][k];
+  });
+  document.getElementById('langMenu').style.display = 'none';
+}
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', function(e){
+  const btn = document.querySelector('.lang-btn');
+  const menu = document.getElementById('langMenu');
+  if(!btn.contains(e.target) && !menu.contains(e.target)){
+    menu.style.display = 'none';
+  }
+});
+
+// 关键修复：页面加载时自动读取语言
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('siteLang') || 'zh';
+  setLang(savedLang);
+
+  // 原有下拉菜单逻辑
+  let btn = document.querySelector('.dropbtn');
+  let menu = document.getElementById('teachMenu');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    let rect = btn.getBoundingClientRect();
+    menu.style.left = rect.left + 'px';
+    menu.style.top = rect.bottom + 5 + 'px';
+    menu.style.display = menu.style.display == 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', function() {
+    menu.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html>

@@ -3,75 +3,495 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>基础使用 | AI教程学院</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
-<script src="js/lang.js" defer></script>
-<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}</style>
+<title data-lang="title">今天你会用AI了么</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
+}
+nav {
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
+  z-index: 999999;
+  padding: 8px 0;
+}
+.nav-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #000;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex;
+  gap: 8px;
+}
+#searchInput {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 150px;
+}
+.search-bar button {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.lang-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* 语言下拉菜单 */
+#langMenu {
+  display:none; 
+  position: fixed; 
+  top:55px; 
+  right:20px; 
+  background:rgba(255,255,255,0.95); 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  width:120px; 
+  z-index:999999;
+  overflow: hidden;
+}
+#langMenu a {
+  display:block;
+  padding:10px 12px;
+  cursor:pointer;
+  color:#333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+#langMenu a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 6px 0;
+  width: 100%;
+  scrollbar-width: none;
+  position: relative;
+  overflow: visible !important;
+  z-index: 9999999 !important;
+}
+.nav-menu::-webkit-scrollbar {display:none;}
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  position: fixed !important;
+  z-index: 9999999 !important;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.dropdown-content span {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
+.section-card{
+  background:#fff;
+  border-radius:20px;
+  padding:25px 30px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+}
+.section-card h2{
+  margin-top:0;
+  margin-bottom:12px;
+  color:#222;
+}
+.section-card p{
+  margin:0;
+  color:#444;
+  line-height:1.7;
+}
+.container{
+  padding:30px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.container h1{
+  color:#fff;
+  margin-bottom:30px;
+  text-align:center;
+}
+footer{
+  color:#fff;
+  padding:20px 30px;
+  line-height:1.6;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+}
+</style>
 </head>
 <body>
 
-<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
-<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
-<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
-<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
-<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
-<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
-</div>
-</div>
-
 <nav>
-<div class="nav-wrap">
-<div class="logo" data-lang="logo">AI教程学院</div>
-<div class="nav-menu">
-<a href="index.html" data-lang="navHome">首页</a>
-<div class="dropdown">
-<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
-<div class="dropdown-content">
-<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
-<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
-<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
-</div>
-</div>
-<a href="tools.html" data-lang="navTools">工具合集</a>
-<a href="learn.html" data-lang="navLearn">学习资源</a>
-</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="搜索教程...">
-<button onclick="searchSite()">搜索</button>
-</div>
-</div>
+  <div class="nav-wrap">
+    <div class="nav-top">
+      <div class="logo" data-lang="logo">今天你会用AI了么</div>
+      <div class="nav-right">
+        <div class="search-bar">
+          <input id="searchInput" type="text" data-lang-placeholder="searchPlaceholder" placeholder="搜索教程...">
+          <button data-lang="searchBtn">搜索</button>
+        </div>
+        <button class="lang-btn" onclick="toggleLangMenu()">🌍 Language</button>
+      </div>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" data-lang="navIndex">首页</a>
+      <div class="dropdown">
+        <button class="dropbtn" data-lang="navTeach">使用教学 ▾</button>
+        <div class="dropdown-content" id="teachMenu">
+          <a href="basic.html" data-lang="menuBasic">基础使用 <span data-lang="menuBasicTip">适合首次接触AI工具</span></a>
+          <a href="advance.html" data-lang="menuAdvance">进阶使用 <span data-lang="menuAdvanceTip">适合个人学习/小型项目</span></a>
+          <a href="senior.html" data-lang="menuSenior">高级使用 <span data-lang="menuSeniorTip">适合大型项目编辑</span></a>
+        </div>
+      </div>
+      <a href="tools.html" data-lang="navTools">工具合集</a>
+      <a href="learn.html" data-lang="navLearn">学习资源</a>
+    </div>
+  </div>
 </nav>
 
+<!-- 语言菜单 -->
+<div id="langMenu">
+<a onclick="setLang('zh')">中文</a>
+<a onclick="setLang('ja')">日本語</a>
+<a onclick="setLang('en')">English</a>
+</div>
+
 <div class="container">
-<h1 data-lang="basic_title">AI工具零基础完整实操入门指南</h1>
-<div class="course-main" style="padding:30px;background:white;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+<h1 data-lang="pageTitle">AI工具零基础完整实操入门指南</h1>
 
-<h2 data-lang="basic_part1">1. 什么是AI工具</h2>
-<p data-lang="basic_part1_text">AI工具是依托人工智能核心算法研发打造的智能数字化服务平台，贴合日常学习、校园作业、职场办公、日常生活全场景使用。</p>
-
-<h2 data-lang="basic_part2">2. 注册与登录</h2>
-<p data-lang="basic_part2_text">优先认准官方正版、口碑合规平台，使用手机号或邮箱完成注册，安全便捷。</p>
-
-<h2 data-lang="basic_part3">3. 界面功能详解</h2>
-<p data-lang="basic_part3_text">主流AI界面包含：输入框、历史记录、设置面板、新建对话、清空记录、导出分享。</p>
-
-<h2 data-lang="basic_part4">4. 基础提问方法</h2>
-<p data-lang="basic_part4_text">提问越清晰具体，AI输出越精准；避免模糊笼统，明确场景、要求、格式。</p>
-
-<h2 data-lang="basic_part5">5. 内容保存与导出</h2>
-<p data-lang="basic_part5_text">支持复制、云端保存、多格式导出、截图留存，方便随时复用。</p>
-
-<h2 data-lang="basic_part6">6. 常见问题解决</h2>
-<p data-lang="basic_part6_text">卡顿、中断、加载异常可通过刷新、切换网络、重启对话快速修复。</p>
-
-</div>
+<div class="section-card">
+<h2 data-lang="t1">一、什么是AI工具（超通俗版）</h2>
+<p data-lang="p1">AI工具就是能帮你干活、解答问题、写文案、做表格、画图片、剪视频的智能助手。不用写代码、不用懂技术，只要会打字、会说话，就能直接用。</p>
 </div>
 
-<footer style="white-space:pre-line;line-height:1.6;">
-制作者Swearshaw
+<div class="section-card">
+<h2 data-lang="t2">二、新手第一次使用AI必须知道的3件事</h2>
+<p data-lang="p2_1">1. 不用安装复杂软件，网页直接用最安全。</p>
+<p data-lang="p2_2">2. 提问越清楚，AI回答越准确。</p>
+<p data-lang="p2_3">3. 所有正规AI都有免费版，新手不用花钱。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="t3">三、AI工具注册与登录（最安全步骤）</h2>
+<p data-lang="p3_1">1. 打开官网 → 点击登录/注册 → 用手机号或第三方快捷登录。</p>
+<p data-lang="p3_2">2. 不随便点陌生链接、不下载来路不明安装包。</p>
+<p data-lang="p3_3">3. 登录后直接进入对话界面，即可开始使用。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="t4">四、界面功能认识（新手一看就会）</h2>
+<p data-lang="p4_1">输入框：你在这里发指令。</p>
+<p data-lang="p4_2">发送按钮：把问题发给AI。</p>
+<p data-lang="p4_3">历史对话：以前的问答记录。</p>
+<p data-lang="p4_4">复制按钮：把AI的答案复制走。</p>
+<p data-lang="p4_5">新建对话：重新开一个话题，不影响之前记录。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="t5">五、零基础提问万能公式（直接套用）</h2>
+<p data-lang="p5_1">我是【身份】，请你帮我【任务】，要求【要求】，输出【格式】。</p>
+<p data-lang="p5_2">例子：我是学生，请帮我写一篇300字自我介绍，语言简洁可爱，输出成段落。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="t6">六、内容保存与导出（避免丢失）</h2>
+<p data-lang="p6_1">1. 选中文字 → 复制 → 粘贴到备忘录/Word/笔记。</p>
+<p data-lang="p6_2">2. 有用的对话可以收藏或保留网页。</p>
+<p data-lang="p6_3">3. 重要内容一定要及时保存。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="t7">七、新手常见问题与解决</h2>
+<p data-lang="p7_1">打不开：切换网络、刷新页面。</p>
+<p data-lang="p7_2">回答慢：高峰期等待，或换免费AI。</p>
+<p data-lang="p7_3">回答不对：重新说得更清楚、更具体。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="t8">八、新手最适合用的免费AI</h2>
+<p data-lang="p8">豆包、Kimi、通义千问、文心一言，全部免费、稳定、好用。</p>
+</div>
+
+</div>
+
+<footer data-lang="footer">
+制作者Swearshaw<br>
 感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
-目前关于AI的使用教学较少，后续会继续寻找
 </footer>
+
+<script>
+// 中日英翻译包
+const langData = {
+  zh: {
+    title: "今天你会用AI了么",
+    logo: "今天你会用AI了么",
+    searchPlaceholder: "搜索教程...",
+    searchBtn: "搜索",
+    navIndex: "首页",
+    navTeach: "使用教学 ▾",
+    navTools: "工具合集",
+    navLearn: "学习资源",
+    menuBasic: "基础使用",
+    menuBasicTip: "适合首次接触AI工具",
+    menuAdvance: "进阶使用",
+    menuAdvanceTip: "适合个人学习/小型项目",
+    menuSenior: "高级使用",
+    menuSeniorTip: "适合大型项目编辑",
+    pageTitle: "AI工具零基础完整实操入门指南",
+    t1: "一、什么是AI工具（超通俗版）",
+    p1: "AI工具就是能帮你干活、解答问题、写文案、做表格、画图片、剪视频的智能助手。不用写代码、不用懂技术，只要会打字、会说话，就能直接用。",
+    t2: "二、新手第一次使用AI必须知道的3件事",
+    p2_1: "1. 不用安装复杂软件，网页直接用最安全。",
+    p2_2: "2. 提问越清楚，AI回答越准确。",
+    p2_3: "3. 所有正规AI都有免费版，新手不用花钱。",
+    t3: "三、AI工具注册与登录（最安全步骤）",
+    p3_1: "1. 打开官网 → 点击登录/注册 → 用手机号或第三方快捷登录。",
+    p3_2: "2. 不随便点陌生链接、不下载来路不明安装包。",
+    p3_3: "3. 登录后直接进入对话界面，即可开始使用。",
+    t4: "四、界面功能认识（新手一看就会）",
+    p4_1: "输入框：你在这里发指令。",
+    p4_2: "发送按钮：把问题发给AI。",
+    p4_3: "历史对话：以前的问答记录。",
+    p4_4: "复制按钮：把AI的答案复制走。",
+    p4_5: "新建对话：重新开一个话题，不影响之前记录。",
+    t5: "五、零基础提问万能公式（直接套用）",
+    p5_1: "我是【身份】，请你帮我【任务】，要求【要求】，输出【格式】。",
+    p5_2: "例子：我是学生，请帮我写一篇300字自我介绍，语言简洁可爱，输出成段落。",
+    t6: "六、内容保存与导出（避免丢失）",
+    p6_1: "1. 选中文字 → 复制 → 粘贴到备忘录/Word/笔记。",
+    p6_2: "2. 有用的对话可以收藏或保留网页。",
+    p6_3: "3. 重要内容一定要及时保存。",
+    t7: "七、新手常见问题与解决",
+    p7_1: "打不开：切换网络、刷新页面。",
+    p7_2: "回答慢：高峰期等待，或换免费AI。",
+    p7_3: "回答不对：重新说得更清楚、更具体。",
+    t8: "八、新手最适合用的免费AI",
+    p8: "豆包、Kimi、通义千问、文心一言，全部免费、稳定、好用。",
+    footer: "制作者Swearshaw<br>感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享"
+  },
+  ja: {
+    title: "AIを使いこなせますか",
+    logo: "AIを使いこなせますか",
+    searchPlaceholder: "チュートリアル検索...",
+    searchBtn: "検索",
+    navIndex: "ホーム",
+    navTeach: "使い方講座 ▾",
+    navTools: "ツール集",
+    navLearn: "学習リソース",
+    menuBasic: "基本操作",
+    menuBasicTip: "AI初心者向け",
+    menuAdvance: "中級活用",
+    menuAdvanceTip: "個人学習・小規模プロジェクト向け",
+    menuSenior: "上級応用",
+    menuSeniorTip: "大規模プロジェクト編集向け",
+    pageTitle: "AIツール初心者向け完全ガイド",
+    t1: "一、AIツールとは（超わかりやすく）",
+    p1: "AIツールは、文章作成、表計算、画像生成、動画編集などを手伝ってくれるスマートアシスタントです。コード不要で、文字入力だけで使えます。",
+    t2: "二、初心者が知っておくべき3つのこと",
+    p2_1: "1. ソフト不要、ウェブ上で安全に利用可能。",
+    p2_2: "2. 指示が明確なほど、回答は正確になります。",
+    p2_3: "3. 優良AIは全て無料プランあり、初心者は課金不要。",
+    t3: "三、AIツール登録・ログイン方法",
+    p3_1: "1. 公式サイトを開き、ログイン/登録をタップ。",
+    p3_2: "2. 怪しいリンク・アプリは絶対に開かない。",
+    p3_3: "3. ログイン後、すぐに対話画面で使用開始。",
+    t4: "四、画面の基本機能（初心者向け）",
+    p4_1: "入力欄：ここに指示を書きます。",
+    p4_2: "送信ボタン：AIに質問を送ります。",
+    p4_3: "履歴：過去のやり取り。",
+    p4_4: "コピー：AIの回答をコピー。",
+    p4_5: "新規会話：新しい話題を開始。",
+    t5: "五、初心者でも使える質問テンプレート",
+    p5_1: "私は【職業】です。【仕事】を手伝ってください。【条件】でお願いします。",
+    p5_2: "例：学生です。300字の自己紹介を作成してください。",
+    t6: "六、内容の保存・エクスポート方法",
+    p6_1: "1. 文字を選択 → コピー → メモやWordに貼り付け。",
+    p6_2: "2. 便利な会話はブックマーク推奨。",
+    p6_3: "3. 重要な内容は速やかに保存しましょう。",
+    t7: "七、初心者がよく困る問題と解決法",
+    p7_1: "開かない：ネット切替・ページリロード。",
+    p7_2: "回答が遅い：混雑時間帯は待機か別AIを利用。",
+    p7_3: "回答がおかしい：もっと具体的に指示。",
+    t8: "八、初心者におすすめ無料AI",
+    p8: "豆包、Kimi、通義千問、文心一言など、全て無料で安定して使えます。",
+    footer: "制作：Swearshaw<br>科普中国、Nenlyさん、商湯教育に感謝"
+  },
+  en: {
+    title: "Can You Use AI Today",
+    logo: "Can You Use AI Today",
+    searchPlaceholder: "Search tutorials...",
+    searchBtn: "Search",
+    navIndex: "Home",
+    navTeach: "Tutorials ▾",
+    navTools: "Tools",
+    navLearn: "Resources",
+    menuBasic: "Basic Use",
+    menuBasicTip: "For AI beginners",
+    menuAdvance: "Advanced Use",
+    menuAdvanceTip: "For study & small projects",
+    menuSenior: "Senior Use",
+    menuSeniorTip: "For large project editing",
+    pageTitle: "Complete Beginner's Guide to AI Tools",
+    t1: "1. What Are AI Tools (Simple Version)",
+    p1: "AI tools are smart assistants that help you write, draw, calculate, edit videos, and answer questions. No coding needed—just type or talk.",
+    t2: "2. 3 Things Beginners Must Know",
+    p2_1: "1. No complex software; use safely on the web.",
+    p2_2: "2. Clear questions get accurate answers.",
+    p2_3: "3. All good AI tools have free plans for beginners.",
+    t3: "3. How to Register & Login Safely",
+    p3_1: "1. Open official site → Login/Sign up with phone or social media.",
+    p3_2: "2. Avoid strange links and unknown apps.",
+    p3_3: "3. Start chatting right after login.",
+    t4: "4. Understand the Interface",
+    p4_1: "Input box: Type your commands here.",
+    p4_2: "Send button: Submit your question to AI.",
+    p4_3: "History: Past conversations.",
+    p4_4: "Copy: Copy AI's answer.",
+    p4_5: "New chat: Start a fresh topic.",
+    t5: "5. Universal Prompt Formula for Beginners",
+    p5_1: "I am a [role]. Please help me [task]. Requirements: [details]. Output: [format].",
+    p5_2: "Example: I am a student. Write a 300-word self-introduction, cute and simple, in paragraph form.",
+    t6: "6. Save & Export Content",
+    p6_1: "1. Select text → Copy → Paste to notes/Word.",
+    p6_2: "2. Bookmark useful conversations.",
+    p6_3: "3. Always save important content promptly.",
+    t7: "7. Common Beginner Issues & Fixes",
+    p7_1: "Can't open: Switch network or refresh.",
+    p7_2: "Slow response: Wait or use another free AI.",
+    p7_3: "Wrong answer: Give clearer instructions.",
+    t8: "8. Best Free AI Tools for Beginners",
+    p8: "Doubao, Kimi, Tongyi Qianwen, Wenxin Yiyan — all free, stable, and easy to use.",
+    footer: "Created by Swearshaw<br>Thanks to Science China, Nenly, SenseTime Education and all bloggers"
+  }
+};
+
+// 切换语言
+function setLang(lang) {
+  localStorage.setItem('siteLang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const key = el.getAttribute('data-lang');
+    if (langData[lang][key]) el.innerHTML = langData[lang][key];
+  });
+
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-lang-placeholder');
+    if (langData[lang][key]) el.placeholder = langData[lang][key];
+  });
+
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+// 显示/隐藏语言菜单
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+
+// 点击空白关闭
+document.addEventListener('click', function(e) {
+  const btn = document.querySelector('.lang-btn');
+  const menu = document.getElementById('langMenu');
+  if (!btn.contains(e.target) && !menu.contains(e.target)) menu.style.display = 'none';
+});
+
+// 初始化
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('siteLang') || 'zh';
+  setLang(saved);
+
+  // 原有下拉菜单
+  let btn = document.querySelector('.dropbtn');
+  let menu = document.getElementById('teachMenu');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    let rect = btn.getBoundingClientRect();
+    menu.style.left = rect.left + 'px';
+    menu.style.top = rect.bottom + 5 + 'px';
+    menu.style.display = menu.style.display == 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', function() {
+    menu.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html>

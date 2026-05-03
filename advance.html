@@ -3,75 +3,488 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>进阶使用 | AI教程学院</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
-<script src="js/lang.js" defer></script>
-<style>.dropdown{position:relative;display:inline-block;}.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}.dropdown:hover .dropdown-content{display:block;}.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}</style>
+<title data-lang="title">今天你会用AI了么</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
+}
+nav {
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
+  z-index: 999999;
+  padding: 8px 0;
+}
+.nav-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #000;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex;
+  gap: 8px;
+}
+#searchInput {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 150px;
+}
+.search-bar button {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.lang-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#langMenu {
+  display:none; 
+  position: fixed; 
+  top:55px; 
+  right:20px; 
+  background:rgba(255,255,255,0.95); 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  width:120px; 
+  z-index:999999;
+  overflow: hidden;
+}
+#langMenu a {
+  display:block;
+  padding:10px 12px;
+  cursor:pointer;
+  color:#333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+#langMenu a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 6px 0;
+  width: 100%;
+  scrollbar-width: none;
+  position: relative;
+  overflow: visible !important;
+  z-index: 9999999 !important;
+}
+.nav-menu::-webkit-scrollbar {display:none;}
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  position: fixed !important;
+  z-index: 9999999 !important;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.dropdown-content span {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
+.section-card{
+  background:#fff;
+  border-radius:20px;
+  padding:25px 30px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  margin-bottom:20px;
+}
+.section-card h2{
+  margin-top:0;
+  margin-bottom:12px;
+  color:#222;
+}
+.section-card h3{
+  font-size:16px;
+  color:#333;
+  margin-top:16px;
+  margin-bottom:8px;
+}
+.section-card p{
+  margin:0;
+  color:#444;
+  line-height:1.7;
+}
+.container{
+  padding:30px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.container h1{
+  color:#fff;
+  margin-bottom:30px;
+  text-align:center;
+}
+footer{
+  color:#fff;
+  padding:20px 30px;
+  line-height:1.6;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+}
+</style>
 </head>
 <body>
 
-<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
-<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
-<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
-<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
-<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
-<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
-</div>
-</div>
-
 <nav>
-<div class="nav-wrap">
-<div class="logo" data-lang="logo">AI教程学院</div>
-<div class="nav-menu">
-<a href="index.html" data-lang="navHome">首页</a>
-<div class="dropdown">
-<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
-<div class="dropdown-content">
-<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
-<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
-<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
-</div>
-</div>
-<a href="tools.html" data-lang="navTools">工具合集</a>
-<a href="learn.html" data-lang="navLearn">学习资源</a>
-</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="搜索教程...">
-<button onclick="searchSite()">搜索</button>
-</div>
-</div>
+  <div class="nav-wrap">
+    <div class="nav-top">
+      <div class="logo" data-lang="logo">今天你会用AI了么</div>
+      <div class="nav-right">
+        <div class="search-bar">
+          <input id="searchInput" type="text" data-lang-placeholder="searchPlaceholder" placeholder="搜索教程...">
+          <button data-lang="searchBtn">搜索</button>
+        </div>
+        <button class="lang-btn" onclick="toggleLangMenu()">🌍 Language</button>
+      </div>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html" data-lang="navIndex">首页</a>
+      <div class="dropdown">
+        <button class="dropbtn" data-lang="navTeach">使用教学 ▾</button>
+        <div class="dropdown-content" id="teachMenu">
+          <a href="basic.html" data-lang="menuBasic">基础使用 <span data-lang="menuBasicTip">适合首次接触AI工具</span></a>
+          <a href="advance.html" data-lang="menuAdvance">进阶使用 <span data-lang="menuAdvanceTip">适合个人学习/小型项目</span></a>
+          <a href="senior.html" data-lang="menuSenior">高级使用 <span data-lang="menuSeniorTip">适合大型项目编辑</span></a>
+        </div>
+      </div>
+      <a href="tools.html" data-lang="navTools">工具合集</a>
+      <a href="learn.html" data-lang="navLearn">学习资源</a>
+    </div>
+  </div>
 </nav>
 
+<div id="langMenu">
+<a onclick="setLang('zh')">中文</a>
+<a onclick="setLang('ja')">日本語</a>
+<a onclick="setLang('en')">English</a>
+</div>
+
 <div class="container">
-<h1 data-lang="advance_title">AI进阶高效使用全攻略</h1>
-<div class="course-main" style="padding:30px;background:white;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+<h1 data-lang="pageTitle">AI进阶高效使用全攻略（含全套万能提示词模板）</h1>
 
-<h2 data-lang="advance_part1">一、高级提示词万能结构</h2>
-<p data-lang="advance_part1_text">公式：角色 + 核心任务 + 硬性要求 + 指定输出格式</p>
-
-<h2 data-lang="advance_part2">二、角色设定深度用法</h2>
-<p data-lang="advance_part2_text">办公、学习、创作、技术四大万能角色库，让回答更专业。</p>
-
-<h2 data-lang="advance_part3">三、强制格式输出技巧</h2>
-<p data-lang="advance_part3_text">段落、分点、表格、大纲、代码块，一次指令自动排版。</p>
-
-<h2 data-lang="advance_part4">四、多轮对话进阶心法</h2>
-<p data-lang="advance_part4_text">不频繁新建对话，持续迭代优化，让AI越改越贴合需求。</p>
-
-<h2 data-lang="advance_part5">五、办公全场景实战</h2>
-<p data-lang="advance_part5_text">公文、邮件、总结、纪要、PPT、数据表格全覆盖。</p>
-
-<h2 data-lang="advance_part6">六、学生全场景实战</h2>
-<p data-lang="advance_part6_text">知识点讲解、作文、翻译、考点、错题解析全能辅助。</p>
-
-</div>
+<div class="section-card">
+<h2 data-lang="s1">一、高级提示词万能结构</h2>
+<p data-lang="s1p1">角色 + 任务 + 背景 + 要求 + 格式 + 示例</p>
+<p data-lang="s1p2">越完整，AI输出越专业、越贴合需求。</p>
 </div>
 
-<footer style="white-space:pre-line;line-height:1.6;">
-制作者Swearshaw
+<div class="section-card">
+<h2 data-lang="s2">二、角色设定：让AI变成专业人士</h2>
+<p data-lang="s2p1">你可以让AI扮演：老师、设计师、程序员、HR、作家、顾问、医生、律师等。</p>
+<p data-lang="s2p2">角色越强，输出越专业。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s3">三、强制输出格式（一次到位）</h2>
+<p data-lang="s3p1">表格、清单、思维导图、分点、段落、PPT大纲、代码块、论文结构。</p>
+<p data-lang="s3p2">一句话指定格式，不用自己排版。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s4">四、多轮对话技巧：越用越精准</h2>
+<p data-lang="s4p1">1. 不要删对话，直接接着改。</p>
+<p data-lang="s4p2">2. 用“继续”“简化”“扩写”“优化”“改成正式版”快速迭代。</p>
+<p data-lang="s4p3">3. 让AI自我检查、自我修正，质量翻倍。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s5">五、全套万能提示词模板（可直接复制）</h2>
+
+<h3 data-lang="t1">模板1：写作万能模板</h3>
+<p data-lang="t1p">请你扮演专业写作师，帮我写一篇【主题】，风格【风格】，字数【字数】，输出【格式】。</p>
+
+<h3 data-lang="t2">模板2：学习辅导模板</h3>
+<p data-lang="t2p">请你扮演老师，用通俗易懂的语言讲解【知识点】，并举例、总结、出3道练习题。</p>
+
+<h3 data-lang="t3">模板3：办公文案模板</h3>
+<p data-lang="t3p">请你扮演职场文案专家，帮我写【文案类型】，语言正式简洁，符合职场规范。</p>
+
+<h3 data-lang="t4">模板4：总结长文档模板</h3>
+<p data-lang="t4p">请你总结以下内容，分点输出，保留核心信息，语言精简：【粘贴内容】</p>
+
+<h3 data-lang="t5">模板5：创意生成模板</h3>
+<p data-lang="t5p">请你提供10个【主题】创意，风格【风格】，适合【用途】。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s6">六、进阶实用功能</h2>
+<p data-lang="s6p">上传文件、总结PDF、表格生成、代码解释、文本润色、翻译、数据整理。</p>
+</div>
+
+<div class="section-card">
+<h2 data-lang="s7">七、适合进阶用户的AI工具</h2>
+<p data-lang="s7p">ChatGPT、Claude、Kimi、DeepSeek、通义千问。</p>
+</div>
+
+</div>
+
+<footer data-lang="footer">
+制作者Swearshaw<br>
 感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
-目前关于AI的使用教学较少，后续会继续寻找
 </footer>
+
+<script>
+const langData = {
+  zh: {
+    title: "今天你会用AI了么",
+    logo: "今天你会用AI了么",
+    searchPlaceholder: "搜索教程...",
+    searchBtn: "搜索",
+    navIndex: "首页",
+    navTeach: "使用教学 ▾",
+    navTools: "工具合集",
+    navLearn: "学习资源",
+    menuBasic: "基础使用",
+    menuBasicTip: "适合首次接触AI工具",
+    menuAdvance: "进阶使用",
+    menuAdvanceTip: "适合个人学习/小型项目",
+    menuSenior: "高级使用",
+    menuSeniorTip: "适合大型项目编辑",
+    pageTitle: "AI进阶高效使用全攻略（含全套万能提示词模板）",
+    s1: "一、高级提示词万能结构",
+    s1p1: "角色 + 任务 + 背景 + 要求 + 格式 + 示例",
+    s1p2: "越完整，AI输出越专业、越贴合需求。",
+    s2: "二、角色设定：让AI变成专业人士",
+    s2p1: "你可以让AI扮演：老师、设计师、程序员、HR、作家、顾问、医生、律师等。",
+    s2p2: "角色越强，输出越专业。",
+    s3: "三、强制输出格式（一次到位）",
+    s3p1: "表格、清单、思维导图、分点、段落、PPT大纲、代码块、论文结构。",
+    s3p2: "一句话指定格式，不用自己排版。",
+    s4: "四、多轮对话技巧：越用越精准",
+    s4p1: "1. 不要删对话，直接接着改。",
+    s4p2: "2. 用“继续”“简化”“扩写”“优化”“改成正式版”快速迭代。",
+    s4p3: "3. 让AI自我检查、自我修正，质量翻倍。",
+    s5: "五、全套万能提示词模板（可直接复制）",
+    t1: "模板1：写作万能模板",
+    t1p: "请你扮演专业写作师，帮我写一篇【主题】，风格【风格】，字数【字数】，输出【格式】。",
+    t2: "模板2：学习辅导模板",
+    t2p: "请你扮演老师，用通俗易懂的语言讲解【知识点】，并举例、总结、出3道练习题。",
+    t3: "模板3：办公文案模板",
+    t3p: "请你扮演职场文案专家，帮我写【文案类型】，语言正式简洁，符合职场规范。",
+    t4: "模板4：总结长文档模板",
+    t4p: "请你总结以下内容，分点输出，保留核心信息，语言精简：【粘贴内容】",
+    t5: "模板5：创意生成模板",
+    t5p: "请你提供10个【主题】创意，风格【风格】，适合【用途】。",
+    s6: "六、进阶实用功能",
+    s6p: "上传文件、总结PDF、表格生成、代码解释、文本润色、翻译、数据整理。",
+    s7: "七、适合进阶用户的AI工具",
+    s7p: "ChatGPT、Claude、Kimi、DeepSeek、通义千问。",
+    footer: "制作者Swearshaw<br>感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享"
+  },
+  ja: {
+    title: "AIを使いこなせますか",
+    logo: "AIを使いこなせますか",
+    searchPlaceholder: "チュートリアル検索...",
+    searchBtn: "検索",
+    navIndex: "ホーム",
+    navTeach: "使い方講座 ▾",
+    navTools: "ツール集",
+    navLearn: "学習リソース",
+    menuBasic: "基本操作",
+    menuBasicTip: "AI初心者向け",
+    menuAdvance: "中級活用",
+    menuAdvanceTip: "個人学習・小規模プロジェクト向け",
+    menuSenior: "上級応用",
+    menuSeniorTip: "大規模プロジェクト編集向け",
+    pageTitle: "AI上級活用ガイド（万能プロンプトテンプレート付き）",
+    s1: "一、高級プロンプトの基本構造",
+    s1p1: "役割 + タスク + 背景 + 要求 + 形式 + 例",
+    s1p2: "詳しく入力するほど、AIの出力が的確になります。",
+    s2: "二、役割設定：AIを専門家にする",
+    s2p1: "AIに教師、デザイナー、プログラマー、ライター、顧問、弁護士などを演じさせられます。",
+    s2p2: "役割が明確なほど、専門的な出力になります。",
+    s3: "三、出力形式の指定（一度で完成）",
+    s3p1: "表、箇条書き、マインドマップ、段落、PPT構成、コード、論文形式など。",
+    s3p2: "一言で指定するだけで、自動的に整形されます。",
+    s4: "四、マルチターン会話のコツ：どんどん精度アップ",
+    s4p1: "1. 会話を削除せず、続けて修正する。",
+    s4p2: "2. 「続けて」「簡単に」「増やす」「直す」「正式版に」で即調整。",
+    s4p3: "3. AIに自己点検・自己修正させると品質が大幅UP。",
+    s5: "五、万能プロンプトテンプレート全集（コピーOK）",
+    t1: "テンプレート1：ライティング万能",
+    t1p: "プロのライターとして、【テーマ】を【スタイル】で【文字数】で【形式】で作成してください。",
+    t2: "テンプレート2：学習サポート",
+    t2p: "先生として、【知識点】を分かりやすく解説し、例とまとめと問題3問を出してください。",
+    t3: "テンプレート3：ビジネス文書",
+    t3p: "社内文書の専門家として、【文書種類】を作成してください。簡潔で正式に。",
+    t4: "テンプレート4：長文まとめ",
+    t4p: "以下の内容をまとめ、箇条書きで核心情報を残してください：【内容を貼る】",
+    t5: "テンプレート5：アイデア生成",
+    t5p: "【テーマ】のアイデア10個を【スタイル】で提案してください。【用途】向け。",
+    s6: "六、上級便利機能",
+    s6p: "ファイルアップロード、PDF要約、表作成、コード解説、文章校正、翻訳、データ整理。",
+    s7: "七、上級ユーザー向けAIツール",
+    s7p: "ChatGPT、Claude、Kimi、DeepSeek、通義千問。",
+    footer: "制作：Swearshaw<br>科普中国、Nenlyさん、商湯教育に感謝"
+  },
+  en: {
+    title: "Can You Use AI Today",
+    logo: "Can You Use AI Today",
+    searchPlaceholder: "Search tutorials...",
+    searchBtn: "Search",
+    navIndex: "Home",
+    navTeach: "Tutorials ▾",
+    navTools: "Tools",
+    navLearn: "Resources",
+    menuBasic: "Basic Use",
+    menuBasicTip: "For AI beginners",
+    menuAdvance: "Advanced Use",
+    menuAdvanceTip: "For study & small projects",
+    menuSenior: "Senior Use",
+    menuSeniorTip: "For large project editing",
+    pageTitle: "Advanced AI Efficiency Guide (All-in-One Prompt Templates)",
+    s1: "1. Advanced Prompt Structure",
+    s1p1: "Role + Task + Background + Requirements + Format + Example",
+    s1p2: "More details = more professional & accurate AI output.",
+    s2: "2. Role Setting: Turn AI into an Expert",
+    s2p1: "AI can be: teacher, designer, coder, HR, writer, consultant, doctor, lawyer.",
+    s2p2: "Clear role = professional output.",
+    s3: "3. Force Output Format (One-step)",
+    s3p1: "Table, list, mind map, points, paragraph, PPT outline, code, paper structure.",
+    s3p2: "One sentence to set format, no manual typing needed.",
+    s4: "4. Multi-turn Chat Tips: Get Better Over Time",
+    s4p1: "1. Don’t delete chat, keep revising.",
+    s4p2: "2. Use “continue”, “simplify”, “expand”, “optimize”, “formal version”.",
+    s4p3: "3. Let AI self-check & self-correct for double quality.",
+    s5: "5. All-Purpose Prompt Templates (Copy & Use)",
+    t1: "Template 1: Writing",
+    t1p: "Act as a professional writer. Write about [topic], style [style], length [length], format [format].",
+    t2: "Template 2: Learning",
+    t2p: "Act as a teacher. Explain [topic] simply, give examples, summary, 3 practice questions.",
+    t3: "Template 3: Office Copy",
+    t3p: "Act as a business writer. Write [type] in formal, clean, professional language.",
+    t4: "Template 4: Summarize Long Text",
+    t4p: "Summarize the content in points, keep core info, concise language: [paste text].",
+    t5: "Template 5: Creative Ideas",
+    t5p: "Give 10 ideas for [topic], style [style], for [purpose].",
+    s6: "6. Advanced Features",
+    s6p: "Upload files, PDF summary, table generation, code explanation, polish, translate, organize data.",
+    s7: "7. AI Tools for Advanced Users",
+    s7p: "ChatGPT, Claude, Kimi, DeepSeek, Tongyi Qianwen.",
+    footer: "Created by Swearshaw<br>Thanks to Science China, Nenly, SenseTime Education and all bloggers"
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem('siteLang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const k = el.getAttribute('data-lang');
+    if (langData[lang][k]) el.innerHTML = langData[lang][k];
+  });
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-lang-placeholder');
+    if (langData[lang][k]) el.placeholder = langData[lang][k];
+  });
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+function toggleLangMenu() {
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', function(e) {
+  const btn = document.querySelector('.lang-btn');
+  const menu = document.getElementById('langMenu');
+  if (!btn.contains(e.target) && !menu.contains(e.target)) {
+    menu.style.display = 'none';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('siteLang') || 'zh';
+  setLang(savedLang);
+
+  let btn = document.querySelector('.dropbtn');
+  let menu = document.getElementById('teachMenu');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    let rect = btn.getBoundingClientRect();
+    menu.style.left = rect.left + 'px';
+    menu.style.top = rect.bottom + 5 + 'px';
+    menu.style.display = menu.style.display == 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', function() {
+    menu.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html>

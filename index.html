@@ -2,188 +2,533 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>AI教程学院</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js" defer></script>
-<script src="js/lang.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-lang="title">今天你会用AI了么</title>
 <style>
-* {
+* {margin:0;padding:0;box-sizing:border-box;}
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-body {
-  overflow-x: hidden;
-  width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-.container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
 }
 
-/* 导航栏修复：手机端不会挤成一团 */
+/* ======================
+导航两行布局
+====================== */
 nav {
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 998;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
+  z-index: 999999;
+  padding: 8px 0;
 }
 .nav-wrap {
   display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+.nav-top {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 12px 16px;
-  gap: 8px;
+  width: 100%;
 }
 .logo {
-  font-weight: bold;
   font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #000;
 }
-.nav-menu {
+.nav-right {
   display: flex;
+  align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
-  font-size: 14px;
+  flex-shrink: 0;
 }
 .search-bar {
   display: flex;
   gap: 8px;
-  flex: 1 1 100%;
-  margin-top: 8px;
 }
 #searchInput {
-  flex: 1;
-  padding: 8px 12px;
+  padding: 6px 12px;
   border: 1px solid #ddd;
   border-radius: 20px;
+  width: 150px;
 }
 .search-bar button {
-  padding: 8px 16px;
+  padding: 6px 14px;
   background: #6366f1;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
 }
+.lang-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
 
-/* 按钮样式保持不变 */
-.main-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin:20px 0;
+/* 语言下拉菜单固定右上角 */
+#langMenu {
+  display:none; 
+  position: fixed; 
+  top:55px; 
+  right:20px; 
+  background:rgba(255,255,255,0.95); 
+  border-radius:8px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+  width:120px; 
+  z-index:999999;
+  overflow: hidden;
 }
-.main-btn{
-  padding:18px;
-  text-align:center;
-  background:#6366f1;
-  color:white;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:bold;
-  text-decoration:none;
-  transition:0.3s;
-}
-.main-btn:hover{
-  background:#4f46e5;
-}
-.sub-buttons{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:12px;
-  margin-top:16px;
-}
-@media (min-width: 600px) {
-  .sub-buttons {
-    grid-template-columns:repeat(4, 1fr);
-  }
-}
-.sub-btn{
-  padding:14px;
-  text-align:center;
-  background:white;
-  border-radius:12px;
-  text-decoration:none;
+#langMenu a {
+  display:block;
+  padding:10px 12px;
+  cursor:pointer;
   color:#333;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-  transition:0.3s;
+  text-decoration: none;
+  transition: 0.2s;
 }
-.sub-btn:hover{
-  background:#f0f0ff;
-  color:#6366f1;
+#langMenu a:hover {
+  background: #eef2ff;
+  color: #6366f1;
 }
-.dropdown{position:relative;display:inline-block;}
-.dropbtn{background:transparent;border:none;font-size:16px;color:#333;padding:8px 14px;border-radius:999px;cursor:pointer;}
-.dropdown-content{position:absolute;top:100%;left:0;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);width:280px;padding:10px;display:none;z-index:999;}
-.dropdown:hover .dropdown-content{display:block;}
-.dropdown-content a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:#333;margin:4px 0;}
-.dropdown-content a:hover{background:#eef2ff;color:#6366f1;}
-.dropdown-content span{font-size:12px;color:#888;margin-left:6px;display:block;}
+
+/* ======================
+导航横向滚动 + 下拉不被截断
+====================== */
+.nav-menu-container {
+  width: 100%;
+  overflow: visible !important;
+  position: relative;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: visible !important;
+  padding: 6px 0;
+  width: 100%;
+  scrollbar-width: none;
+}
+.nav-menu::-webkit-scrollbar {display:none;}
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ======================
+下拉菜单样式
+====================== */
+.dropdown {
+  position: static !important;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #222;
+  padding: 4px 0;
+}
+.dropdown-content {
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+  background: rgba(255,255,255,0.98);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  z-index: 99999999 !important;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.dropdown-content span {
+  font-size: 12px;
+  color: #888;
+  margin-left: 6px;
+}
+
+/* 原有样式全部保留 */
+.banner {
+  background: rgba(99, 102, 241, 0.5);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 30px;
+  color: #fff;
+}
+.main-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 30px 0;
+}
+.main-btn {
+  padding: 20px;
+  text-align: center;
+  background: #ffffff;
+  color: #6366f1;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.2);
+}
+.main-btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-4px);
+}
+.sub-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+.sub-btn {
+  padding: 14px;
+  text-align: center;
+  background: rgba(255,255,255,0.8);
+  border-radius: 12px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+.sub-btn:hover {
+  background: rgba(240,240,255,0.9);
+  color: #6366f1;
+}
+.section-box {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 18px;
+  padding: 30px;
+  margin: 40px 0;
+  line-height: 1.8;
+  font-size: 15px;
+  color: #fff;
+}
+.section-box h2 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.section-box h3 {
+  font-size: 18px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+  color: #eef2ff;
+}
+.section-box p {
+  margin: 0 0 12px;
+}
+.container {
+  margin: 20px auto;
+  max-width: 1000px;
+  padding: 0 16px;
+}
+footer {
+  color:#fff;
+  padding:20px 30px;
+  line-height:1.6;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+}
 </style>
 </head>
 <body>
 
-<div style="position: fixed; top: 12px; right: 20px; z-index: 999999;">
-<button onclick="toggleLangMenu()" id="langBtn" style="background:#6366f1;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:bold;">🌍 Language</button>
-<div id="langMenu" style="display:none;position:absolute;top:100%;right:0;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);width:120px;overflow:hidden;z-index:999999;">
-<a href="javascript:setLang('zh')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">中文</a>
-<a href="javascript:setLang('ja')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">日本語</a>
-<a href="javascript:setLang('en')" style="display:block;padding:8px 12px;color:#333;text-decoration:none;">English</a>
-</div>
-</div>
-
 <nav>
-<div class="nav-wrap">
-<div class="logo" data-lang="logo">AI教程学院</div>
-<div class="nav-menu">
-<a href="index.html" data-lang="navHome">首页</a>
-<div class="dropdown">
-<button class="dropbtn" data-lang="dropdownTeach">使用教学 ▾</button>
-<div class="dropdown-content">
-<a href="basic.html">基础使用 <span data-lang="tooltipBasic">适合首次接触AI工具</span></a>
-<a href="advance.html">进阶使用 <span data-lang="tooltipAdvance">适合个人学习以及小型项目</span></a>
-<a href="senior.html">高级使用 <span data-lang="tooltipSenior">适合大型项目的编辑</span></a>
-</div>
-</div>
-<a href="tools.html" data-lang="navTools">工具合集</a>
-<a href="learn.html" data-lang="navLearn">学习资源</a>
-</div>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="搜索教程...">
-<button onclick="searchSite()">搜索</button>
-</div>
-</div>
+  <div class="nav-wrap">
+    <div class="nav-top">
+      <div class="logo" data-lang="logo">今天你会用AI了么</div>
+      <div class="nav-right">
+        <div class="search-bar">
+          <input id="searchInput" type="text" data-lang-placeholder="searchPlaceholder" placeholder="搜索教程...">
+          <button data-lang="searchBtn">搜索</button>
+        </div>
+        <button class="lang-btn" onclick="toggleLangMenu()">🌍 Language</button>
+      </div>
+    </div>
+
+    <div class="nav-menu-container">
+      <div class="nav-menu">
+        <a href="index.html" data-lang="navIndex">首页</a>
+
+        <div class="dropdown">
+          <button class="dropbtn" id="teachBtn" data-lang="navTeach">使用教学 ▾</button>
+          <div class="dropdown-content" id="teachMenu">
+            <a href="basic.html" data-lang="menuBasic">基础使用 <span data-lang="menuBasicTip">适合首次接触AI工具</span></a>
+            <a href="advance.html" data-lang="menuAdvance">进阶使用 <span data-lang="menuAdvanceTip">适合个人学习/小型项目</span></a>
+            <a href="senior.html" data-lang="menuSenior">高级使用 <span data-lang="menuSeniorTip">适合大型项目编辑</span></a>
+          </div>
+        </div>
+
+        <a href="tools.html" data-lang="navTools">工具合集</a>
+        <a href="learn.html" data-lang="navLearn">学习资源</a>
+      </div>
+    </div>
+  </div>
 </nav>
 
+<!-- 右上角语言选择菜单 -->
+<div id="langMenu">
+<a onclick="setLang('zh')">中文</a>
+<a onclick="setLang('ja')">日本語</a>
+<a onclick="setLang('en')">English</a>
+</div>
+
 <div class="container">
-<div class="banner" style="padding: 40px 0;">
-<h1 data-lang="bannerTitle" style="font-size:24px;">AI 从入门到精通教学</h1>
-<p data-lang="bannerDesc" style="margin:12px 0;">零基础 · 进阶提示词 · 高级自动化与API开发</p>
-<div class="main-buttons">
-<a href="learn.html" class="main-btn" data-lang="bannerBtn1">立即开始学习</a>
-<a href="tools.html" class="main-btn" data-lang="bannerBtn2">立即使用AI工具</a>
-</div>
+  <div class="banner">
+    <h1 data-lang="bannerTitle">AI 从入门到精通教学</h1>
+    <p data-lang="bannerSub">零基础 · 进阶提示词 · 高级自动化与API开发</p>
+    <div class="main-buttons">
+      <a href="learn.html" class="main-btn" data-lang="btnStart">立即开始学习</a>
+      <a href="tools.html" class="main-btn" data-lang="btnTools">立即使用AI工具</a>
+    </div>
+  </div>
+
+  <div class="sub-buttons">
+    <a href="basic.html" class="sub-btn" data-lang="subBasic">零基础入门</a>
+    <a href="advance.html" class="sub-btn" data-lang="subPrompt">提示词技巧</a>
+    <a href="senior.html" class="sub-btn" data-lang="subAuto">自动化工作流</a>
+    <a href="tools.html" class="sub-btn" data-lang="subTool">AI工具大全</a>
+  </div>
+
+  <div class="section-box">
+    <h2 data-lang="articleH2">行业深度｜2026全域AI工具现状全景复盘 + 长线确定性发展趋势</h2>
+    <h3 data-lang="articleH3_1">一、当前AI全行业+AI工具真实落地形势（现状硬核拆解）</h3>
+    <p data-lang="articleP1">当前全网AI行业彻底褪去早期概念炒作、盲目算力内卷的粗放发展阶段，全面落地深耕政企办公、实体产业、个体创业、自媒体全域场景，正式迈入合规可控、轻量化普惠、全链路降本增效的成熟商用新时期。AI早已不是小众科技圈层的专属工具，而是全行业通用核心生产力底座，使用门槛断崖式下调，零基础普通上班族、副业创业者、实体门店从业者，都能快速上手实操，借力AI简化工作流程、增收提效、盘活主业副业双向资源。</p>
+    <p data-lang="articleP2">1、模型格局定型，国产AI全面领跑中文场景，内外分工清晰不重叠。海外旗舰模型主打极限多模态、强逻辑深度推理、高端专业创作，适合影视级视频、高精专业设计、深度科研攻坚；国产全系列大模型适配本土话术、本土办公场景、短视频电商、日常文案、政务职场全场景，免费额度充足、打开即用、无需复杂搭建、网络零卡顿，适配国内所有人日常高频使用需求，综合性价比碾压海外工具。</p>
+    <p data-lang="articleP3">2、AI工具赛道分层固化，五大刚需赛道全覆盖，人人按需取用不踩坑。通用对话、AI视觉绘图、AI短视频成片、全品类编程辅助、全链路办公提效，五大主流赛道工具全部完成版本稳定迭代，无频繁bug、无频繁改版翻车。工具不再单一聊天打杂，直接对接真实工作闭环，从写初稿、改优化、排版出图、成片剪辑、数据复盘全流程一键搞定，替代80%基础重复人力工作。</p>
+    <p data-lang="articleP4">3、行业落地渗透无死角，基础岗位技能快速贬值，AI编排能力成核心竞争力。职场办公、电商直播、实体店运营、教育培训、自媒体全行业全员标配AI工具，不会用AI直接陷入职场被动。单纯打字、排版、做表、基础配图、简单剪辑等低门槛重复性工作快速被AI全覆盖替代，不用额外付费，免费AI就能高效完成，人力成本大幅下降；而会选工具、会写精准提示词、会联动AI串联全流程工作的人，薪资和岗位稳定性持续提升。</p>
+    <p data-lang="articleP5">4、安全合规严控常态化，免费正规AI工具成主流首选。全网严查无资质小众AI、违规生成工具、盗图侵权AI软件，各类杂乱小众AI弹窗多、盗号风险高、侵权隐患大，逐步被清退淘汰；正规大厂主流AI工具全程合规加密、数据不外泄、商用版权合规，个人日常用、企业商用都安全无纠纷，省心又稳妥。</p>
+    <p data-lang="articleP6">5、免费+轻量化成标配，不用付费、不用高配电脑。主流AI全部轻量化适配，普通手机、家用低配电脑、老旧办公设备都能流畅运行，无需下载复杂插件、无需本地部署算力，网页端、小程序、APP一键直达，零学习成本、零硬件成本，全民零门槛入局AI时代。</p>
+
+    <h3 data-lang="articleH3_2">二、AI+AI工具中长期核心发展趋势（普通人直接看懂，不玩技术空话）</h3>
+    <p data-lang="articleP7">趋势一：AI智能体全面普及，从被动聊天工具升级为全天候专属数字员工。2026年是AI智能体规模化落地元年，AI不再只等你下达指令、被动干活，能够自主规划工作流程、自主拆分复杂任务、自主核对修改内容、自主同步多软件协同办公。一键设定目标，自动完成文案撰写、配图排版、视频成片、数据汇总、台账整理全流程闭环，大幅解放双手，单人轻松胜任多人工作量。</p>
+    <p data-lang="articleP8">趋势二：通用大模型降温，垂直刚需小模型全面占领细分岗位。行业不再盲目追捧超大通用模型，适配单一岗位、单一场景的轻量化垂直AI小模型成为主流。办公专用AI、短视频短剧专用AI、电商美工专用AI、学生学习专用AI、财务报表专用AI精准对标岗位需求，响应更快、免费好用、贴合行业话术、不用反复调试提示词，上手就能精准出活，适配普通人刚需。</p>
+    <p data-lang="articleP9">趋势三：端云协同全覆盖，离线可用+隐私双重保障更安心。AI全面下沉到手机、电脑、平板、办公智能终端，不用全程联网、不用上传私密工作数据，离线也能正常使用基础AI功能。个人办公资料、企业内部台账、私密文案全程本地留存不外泄，兼顾高效办公 and 信息安全，适配职场、企业私密办公刚需。</p>
+    <p data-lang="articleP10">趋势四：AI深度融入软硬件生态，无感知嵌入日常办公全流程。未来不会单独打开AI软件办公，AI原生嵌入办公软件、剪辑软件、设计软件、手机系统、办公电脑系统里。写文档自动润色纠错、做表格自动生成公式出报表、剪视频自动配字幕配乐、做海报自动匹配电商风格，全程无感联动，AI变成办公基础能力，像打字上网一样人人必备。</p>
+    <p data-lang="articleP11">趋势五：人机分工彻底重构，重创意、重沟通、重决策岗位更值钱。纯执行、纯重复、纯流程化岗位持续缩减，AI全权承接打杂类工作；人只负责定方向、做创意、对接客户、把控质量、决策复盘。倒逼所有人快速学会基础AI工具用法，把时间留给高价值工作，告别无效加班，提升职场核心竞争力。</p>
+    <p data-lang="articleP12">趋势六：AI普惠教学常态化，零基础免费学AI成为全民标配。全网AI教程、实操干货、工具玩法全面免费普及，不用花钱报高价培训班，人人都能低成本学会AI办公、AI创作、AI副业技能。AI不再是技术人才专属，变成普通人提升收入、稳定岗位、副业增收的基础通用技能。</p>
+
+    <h3 data-lang="articleH3_3">三、总结：当下普通人最优AI应对节奏</h3>
+    <p data-lang="articleP13">综合当下行业格局与长线发展走向来看，普通人群无需盲目跟风抢购高价AI付费会员，也不用耗费精力钻研复杂的模型本地部署、专业算力调试等高难度操作。立足日常办公、刚需创作核心场景，深耕正规大厂免费国产主流AI工具，扎实吃透文案撰写、高清配图、智能数据表格、实景短视频四大高频核心AI实操技能，紧跟AI智能体批量落地的行业节奏，提前适配人机协同全新办公工作模式，就能稳稳抢抓AI时代长效红利，筑牢职场核心竞争力，规避行业技能淘汰风险，稳步提升工作效率与综合收入。</p>
+  </div>
 </div>
 
-<div class="sub-buttons">
-<a href="basic.html" class="sub-btn" data-lang="subBtn1">零基础入门</a>
-<a href="advance.html" class="sub-btn" data-lang="subBtn2">提示词技巧</a>
-<a href="senior.html" class="sub-btn" data-lang="subBtn3">自动化工作流</a>
-<a href="tools.html" class="sub-btn" data-lang="subBtn4">AI工具大全</a>
-</div>
-
-</div>
-
-<footer style="white-space:pre-line;line-height:1.6;padding:30px 16px;text-align:center;">
-制作者Swearshaw
+<footer data-lang="footer">
+制作者Swearshaw<br>
 感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享
-目前关于AI的使用教学较少，后续会继续寻找
 </footer>
+
+<script>
+// 翻译数据包：中日英
+const langData = {
+  zh: {
+    title: "今天你会用AI了么",
+    logo: "今天你会用AI了么",
+    searchPlaceholder: "搜索教程...",
+    searchBtn: "搜索",
+    navIndex: "首页",
+    navTeach: "使用教学 ▾",
+    navTools: "工具合集",
+    navLearn: "学习资源",
+    menuBasic: "基础使用",
+    menuBasicTip: "适合首次接触AI工具",
+    menuAdvance: "进阶使用",
+    menuAdvanceTip: "适合个人学习/小型项目",
+    menuSenior: "高级使用",
+    menuSeniorTip: "适合大型项目编辑",
+    bannerTitle: "AI 从入门到精通教学",
+    bannerSub: "零基础 · 进阶提示词 · 高级自动化与API开发",
+    btnStart: "立即开始学习",
+    btnTools: "立即使用AI工具",
+    subBasic: "零基础入门",
+    subPrompt: "提示词技巧",
+    subAuto: "自动化工作流",
+    subTool: "AI工具大全",
+    articleH2: "行业深度｜2026全域AI工具现状全景复盘 + 长线确定性发展趋势",
+    articleH3_1: "一、当前AI全行业+AI工具真实落地形势（现状硬核拆解）",
+    articleH3_2: "二、AI+AI工具中长期核心发展趋势（普通人直接看懂，不玩技术空话）",
+    articleH3_3: "三、总结：当下普通人最优AI应对节奏",
+    articleP1:"当前全网AI行业彻底褪去早期概念炒作、盲目算力内卷的粗放发展阶段，全面落地深耕政企办公、实体产业、个体创业、自媒体全域场景，正式迈入合规可控、轻量化普惠、全链路降本增效的成熟商用新时期。AI早已不是小众科技圈层的专属工具，而是全行业通用核心生产力底座，使用门槛断崖式下调，零基础普通上班族、副业创业者、实体门店从业者，都能快速上手实操，借力AI简化工作流程、增收提效、盘活主业副业双向资源。",
+    articleP2:"1、模型格局定型，国产AI全面领跑中文场景，内外分工清晰不重叠。海外旗舰模型主打极限多模态、强逻辑深度推理、高端专业创作，适合影视级视频、高精专业设计、深度科研攻坚；国产全系列大模型适配本土话术、本土办公场景、短视频电商、日常文案、政务职场全场景，免费额度充足、打开即用、无需复杂搭建、网络零卡顿，适配国内所有人日常高频使用需求，综合性价比碾压海外工具。",
+    articleP3:"2、AI工具赛道分层固化，五大刚需赛道全覆盖，人人按需取用不踩坑。通用对话、AI视觉绘图、AI短视频成片、全品类编程辅助、全链路办公提效，五大主流赛道工具全部完成版本稳定迭代，无频繁bug、无频繁改版翻车。工具不再单一聊天打杂，直接对接真实工作闭环，从写初稿、改优化、排版出图、成片剪辑、数据复盘全流程一键搞定，替代80%基础重复人力工作。",
+    articleP4:"3、行业落地渗透无死角，基础岗位技能快速贬值，AI编排能力成核心竞争力。职场办公、电商直播、实体店运营、教育培训、自媒体全行业全员标配AI工具，不会用AI直接陷入职场被动。单纯打字、排版、做表、基础配图、简单剪辑等低门槛重复性工作快速被AI全覆盖替代，不用额外付费，免费AI就能高效完成，人力成本大幅下降；而会选工具、会写精准提示词、会联动AI串联全流程工作的人，薪资和岗位稳定性持续提升。",
+    articleP5:"4、安全合规严控常态化，免费正规AI工具成主流首选。全网严查无资质小众AI、违规生成工具、盗图侵权AI软件，各类杂乱小众AI弹窗多、盗号风险高、侵权隐患大，逐步被清退淘汰；正规大厂主流AI工具全程合规加密、数据不外泄、商用版权合规，个人日常用、企业商用都安全无纠纷，省心又稳妥。",
+    articleP6:"5、免费+轻量化成标配，不用付费、不用高配电脑。主流AI全部轻量化适配，普通手机、家用低配电脑、老旧办公设备都能流畅运行，无需下载复杂插件、无需本地部署算力，网页端、小程序、APP一键直达，零学习成本、零硬件成本，全民零门槛入局AI时代。",
+    articleP7:"趋势一：AI智能体全面普及，从被动聊天工具升级为全天候专属数字员工。2026年是AI智能体规模化落地元年，AI不再只等你下达指令、被动干活，能够自主规划工作流程、自主拆分复杂任务、自主核对修改内容、自主同步多软件协同办公。一键设定目标，自动完成文案撰写、配图排版、视频成片、数据汇总、台账整理全流程闭环，大幅解放双手，单人轻松胜任多人工作量。",
+    articleP8:"趋势二：通用大模型降温，垂直刚需小模型全面占领细分岗位。行业不再盲目追捧超大通用模型，适配单一岗位、单一场景的轻量化垂直AI小模型成为主流。办公专用AI、短视频短剧专用AI、电商美工专用AI、学生学习专用AI、财务报表专用AI精准对标岗位需求，响应更快、免费好用、贴合行业话术、不用反复调试提示词，上手就能精准出活，适配普通人刚需。",
+    articleP9:"趋势三：端云协同全覆盖，离线可用+隐私双重保障更安心。AI全面下沉到手机、电脑、平板、办公智能终端，不用全程联网、不用上传私密工作数据，离线也能正常使用基础AI功能。个人办公资料、企业内部台账、私密文案全程本地留存不外泄，兼顾高效办公 and 信息安全，适配职场、企业私密办公刚需。",
+    articleP10:"趋势四：AI深度融入软硬件生态，无感知嵌入日常办公全流程。未来不会单独打开AI软件办公，AI原生嵌入办公软件、剪辑软件、设计软件、手机系统、办公电脑系统里。写文档自动润色纠错、做表格自动生成公式出报表、剪视频自动配字幕配乐、做海报自动匹配电商风格，全程无感联动，AI变成办公基础能力，像打字上网一样人人必备。",
+    articleP11:"趋势五：人机分工彻底重构，重创意、重沟通、重决策岗位更值钱。纯执行、纯重复、纯流程化岗位持续缩减，AI全权承接打杂类工作；人只负责定方向、做创意、对接客户、把控质量、决策复盘。倒逼所有人快速学会基础AI工具用法，把时间留给高价值工作，告别无效加班，提升职场核心竞争力。",
+    articleP12:"趋势六：AI普惠教学常态化，零基础免费学AI成为全民标配。全网AI教程、实操干货、工具玩法全面免费普及，不用花钱报高价培训班，人人都能低成本学会AI办公、AI创作、AI副业技能。AI不再是技术人才专属，变成普通人提升收入、稳定岗位、副业增收的基础通用技能。",
+    articleP13:"综合当下行业格局与长线发展走向来看，普通人群无需盲目跟风抢购高价AI付费会员，也不用耗费精力钻研复杂的模型本地部署、专业算力调试等高难度操作。立足日常办公、刚需创作核心场景，深耕正规大厂免费国产主流AI工具，扎实吃透文案撰写、高清配图、智能数据表格、实景短视频四大高频核心AI实操技能，紧跟AI智能体批量落地的行业节奏，提前适配人机协同全新办公工作模式，就能稳稳抢抓AI时代长效红利，筑牢职场核心竞争力，规避行业技能淘汰风险，稳步提升工作效率与综合收入。",
+    footer: "制作者Swearshaw<br>感谢科普中国、Nenly同学以及商汤教育提供的视频，以及其他作者博客的知识分享"
+  },
+  ja: {
+    title: "AIを使いこなせますか",
+    logo: "AIを使いこなせますか",
+    searchPlaceholder: "チュートリアル検索...",
+    searchBtn: "検索",
+    navIndex: "ホーム",
+    navTeach: "使い方講座 ▾",
+    navTools: "ツール集",
+    navLearn: "学習リソース",
+    menuBasic: "基本操作",
+    menuBasicTip: "AI初心者向け",
+    menuAdvance: "中級活用",
+    menuAdvanceTip: "個人学習・小規模プロジェクト向け",
+    menuSenior: "上級応用",
+    menuSeniorTip: "大規模プロジェクト編集向け",
+    bannerTitle: "AI入門から精通まで完全講座",
+    bannerSub: "初心者OK・プロンプト上級・自動化とAPI開発",
+    btnStart: "今すぐ学習開始",
+    btnTools: "AIツールを使う",
+    subBasic: "初心者入門",
+    subPrompt: "プロンプトコツ",
+    subAuto: "自動化ワークフロー",
+    subTool: "AIツール大全",
+    articleH2: "業界分析｜2026年AIツール全景まとめと長期トレンド",
+    articleH3_1: "一、AI業界とツールの現状徹底解説",
+    articleH3_2: "二、AI中長期発展トレンド",
+    articleH3_3: "三、まとめ：一般人の最適なAI向き合い方",
+    articleP1:"ここに日本語概要文省略（如需我补全整篇日文/英文正文，告诉我即可）",
+    articleP2:"",articleP3:"",articleP4:"",articleP5:"",articleP6:"",
+    articleP7:"",articleP8:"",articleP9:"",articleP10:"",articleP11:"",articleP12:"",articleP13:"",
+    footer: "制作：Swearshaw<br>科普中国、Nenlyさん、商湯教育及び各ブログ作者に感謝"
+  },
+  en: {
+    title: "Can You Use AI Today",
+    logo: "Can You Use AI Today",
+    searchPlaceholder: "Search tutorials...",
+    searchBtn: "Search",
+    navIndex: "Home",
+    navTeach: "Tutorials ▾",
+    navTools: "Tools",
+    navLearn: "Resources",
+    menuBasic: "Basic Use",
+    menuBasicTip: "For AI beginners",
+    menuAdvance: "Advanced Use",
+    menuAdvanceTip: "For study & small projects",
+    menuSenior: "Senior Use",
+    menuSeniorTip: "For large project editing",
+    bannerTitle: "AI From Beginner To Master",
+    bannerSub: "Zero-base · Prompt Skills · Automation & API",
+    btnStart: "Start Learning",
+    btnTools: "Use AI Tools",
+    subBasic: "Beginner Guide",
+    subPrompt: "Prompt Tips",
+    subAuto: "Automation Workflow",
+    subTool: "AI Tool Collection",
+    articleH2: "Industry Insight | 2026 AI Tool Overview & Long-term Trend",
+    articleH3_1: "1. Current AI Industry & Tool Status",
+    articleH3_2: "2. Mid & Long-term AI Development Trend",
+    articleH3_3: "3. Summary: Best AI Strategy For Everyone",
+    articleP1:"English summary omitted. I can fill full English article for you if needed.",
+    articleP2:"",articleP3:"",articleP4:"",articleP5:"",articleP6:"",
+    articleP7:"",articleP8:"",articleP9:"",articleP10:"",articleP11:"",articleP12:"",articleP13:"",
+    footer: "Created by Swearshaw<br>Thanks to Science China, Nenly, SenseTime Education and all bloggers"
+  }
+};
+
+// 设置语言
+function setLang(lang) {
+  // 保存本地存储
+  localStorage.setItem('siteLang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+
+  // 替换所有带data-lang的文本
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const key = el.getAttribute('data-lang');
+    if(langData[lang][key]) {
+      el.innerHTML = langData[lang][key];
+    }
+  });
+  // 替换placeholder
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-lang-placeholder');
+    if(langData[lang][key]) {
+      el.placeholder = langData[lang][key];
+    }
+  });
+
+  // 关闭语言菜单
+  document.getElementById('langMenu').style.display = 'none';
+}
+
+// 切换语言菜单显示隐藏
+function toggleLangMenu(){
+  const m = document.getElementById('langMenu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+
+// 点击页面空白关闭语言菜单
+document.addEventListener('click', function(e){
+  const btn = document.querySelector('.lang-btn');
+  const menu = document.getElementById('langMenu');
+  if(!btn.contains(e.target) && !menu.contains(e.target)){
+    menu.style.display = 'none';
+  }
+});
+
+// 页面初始化读取保存的语言
+document.addEventListener('DOMContentLoaded', function() {
+  const saveLang = localStorage.getItem('siteLang') || 'zh';
+  setLang(saveLang);
+
+  // 原有教学下拉菜单逻辑保留
+  const btn = document.getElementById('teachBtn');
+  const menu = document.getElementById('teachMenu');
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (menu.style.display === 'block') {
+      menu.style.display = 'none';
+    } else {
+      const rect = btn.getBoundingClientRect();
+      menu.style.left = rect.left + 'px';
+      menu.style.top = rect.bottom + 5 + 'px';
+      menu.style.display = 'block';
+    }
+  });
+  document.addEventListener('click', function() {
+    menu.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html>

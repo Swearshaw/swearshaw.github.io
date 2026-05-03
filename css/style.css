@@ -1,240 +1,144 @@
-/* 全局重置 & 基础 */
-* {
+/* 全局背景图片 */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #0a0a1a;
+  color: #fff;
 }
 
-body {
-  font-family: "Segoe UI", "Microsoft Yahei", sans-serif;
-  background-color: #f0f2f5;
-  color: #2c3e50;
-  line-height: 1.7;
-}
-
-/* 动画全局 */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes floatUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-6px); }
-}
-
-/* 导航栏 仿BakaXL 毛玻璃 */
+/* 导航栏：半透明条纹样式 */
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+  background-image: linear-gradient(90deg, rgba(240,240,240,0.5) 0%, rgba(240,240,240,0.5) 50%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.5) 100%);
+  background-size: 40px 100%;
+  position: relative;
   z-index: 999;
 }
+
 .nav-wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 70px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 25px;
-}
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-.nav-menu a {
-  text-decoration: none;
-  color: #444;
-  font-size: 15px;
-  margin: 0 12px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  transition: all 0.3s ease;
-}
-.nav-menu a:hover {
-  background: #eef2ff;
-  color: #6366f1;
+  padding: 12px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* 全站搜索框 */
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 24px;
+  color: #000;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow: visible !important;
+  padding: 4px 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-menu::-webkit-scrollbar {
+  height: 6px;
+}
+.nav-menu::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 3px;
+}
+.nav-menu::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+.nav-menu a, .dropbtn {
+  font-size: 16px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
 .search-bar {
   display: flex;
-  align-items: center;
-  background: #fff;
-  border-radius: 999px;
-  padding: 7px 18px;
-  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.15);
+  gap: 8px;
 }
-.search-bar input {
-  border: none;
-  outline: none;
-  width: 160px;
-  font-size: 14px;
-  background: transparent;
+#searchInput {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 150px;
 }
 .search-bar button {
+  padding: 6px 14px;
+  background: #6366f1;
+  color: #fff;
   border: none;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  color: #fff;
-  padding: 5px 14px;
-  border-radius: 999px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
-}
-.search-bar button:hover {
-  opacity: 0.9;
 }
 
-/* 容器通用 */
-.container {
-  max-width: 1200px;
-  margin: 90px auto 50px;
-  padding: 0 25px;
-  animation: fadeIn 0.6s ease;
-}
-
-/* 首页Banner */
-.banner {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  border-radius: 24px;
-  margin: 20px auto;
-  padding: 80px 30px;
-  text-align: center;
+.lang-btn {
+  background: #6366f1;
   color: #fff;
-  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
 }
-.banner h1 {
-  font-size: 46px;
-  margin-bottom: 15px;
-}
-.banner p {
-  font-size: 18px;
-  opacity: 0.92;
-  margin-bottom: 30px;
-}
-.btn {
+
+.dropdown {
+  position: relative;
   display: inline-block;
-  padding: 12px 36px;
-  background: #fff;
-  color: #6366f1;
-  font-weight: 600;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-.btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+  z-index: 999999 !important;
 }
 
-/* 仿BakaXL 卡片布局 */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
-  margin: 50px 0;
-}
-.card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 35px 25px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transition: all 0.4s ease;
-}
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.18);
-}
-.card h3 {
-  font-size: 22px;
-  color: #6366f1;
-  margin-bottom: 15px;
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-/* 教程页 左右布局 */
-.course-wrap {
-  display: flex;
-  gap: 30px;
-  margin-top: 30px;
-  flex-wrap: wrap;
-}
-.course-sidebar {
-  width: 260px;
-  background: #fff;
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  position: sticky;
-  top: 90px;
-  height: calc(100vh - 100px);
-}
-.course-sidebar h4 {
-  font-size: 18px;
-  color: #6366f1;
-  margin-bottom: 20px;
-}
-.course-sidebar a {
-  display: block;
-  text-decoration: none;
-  color: #444;
-  padding: 10px 12px;
+.dropdown-content {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background: rgba(255,255,255,0.95);
   border-radius: 12px;
-  margin: 8px 0;
-  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  width: 280px;
+  padding: 10px;
+  display: none;
+  z-index: 999999 !important;
 }
-.course-sidebar a:hover {
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #333;
+  margin: 4px 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dropdown-content a:hover {
   background: #eef2ff;
   color: #6366f1;
-}
-.course-main {
-  flex: 1;
-  min-width: 300px;
-  background: #fff;
-  border-radius: 20px;
-  padding: 35px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-}
-.course-main h2 {
-  color: #6366f1;
-  margin: 25px 0 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-/* 页脚 */
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  color: #888;
-  font-size: 14px;
-}
-
-/* 移动端自适应 */
-@media (max-width: 768px) {
-  .nav-wrap {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 15px;
-  }
-  .course-sidebar {
-    width: 100%;
-    height: auto;
-    position: static;
-  }
-  .banner h1 {
-    font-size: 32px;
-  }
-  .search-bar input {
-    width: 120px;
-  }
 }
